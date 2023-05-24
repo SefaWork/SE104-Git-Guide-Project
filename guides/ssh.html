@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SSH Anahtarı</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="/guides/" class="next-page">Sonraki Ders >></a>
+        </div>
+
+        <img src="/images/ssh.webp" style="
+            display: block;
+            background-color: white;
+            margin: auto;
+            width: 40%;
+            padding: 20px 150px;
+            border: 3px solid #2e2e2e;
+        ">
+
+        <h1>SSH Anahtarı</h1>
+
+        <p>
+            SSH anahtarları, güvenli bağlantıları doğrulamak için kullanılır.
+            Bu dersi takip ederek, bir SSH anahtarı oluşturabilir ve kullanmaya başlayabilirsiniz.
+            Git, uzak depolara push veya pull işlemleri sırasında geleneksel parola doğrulaması yerine SSH anahtarlarını kullanabilmektedir.
+            <br><br>
+            SSH, uzaktan dosya transferi, ağ yönetimi ve uzaktan işletim sistemi erişimi gibi işlemler için kullanılmaktadır.
+            SSH, uzak taraflar arasında güvenli bir el sıkışma başlatmak için bir anahtar çifti kullanır.
+            Anahtar çifti, bir genel anahtar ve özel anahtar içerir.
+            Genel anahtarı bir kilit gibi düşünmek konuyu anlamak için yararlı olabilir.
+            Bu genel "kilidi" uzak partilere verip "kilitlemelerini" sağlarsınız.
+            Sonra bu "kilidi" özel anahtarı kullanarak açabilirsiniz.
+        </p>
+
+        <h2>SSH Anahtarı Nasıl Oluşturulur?</h2>
+
+        <p>
+            SSH anahtarları açık anahtarlı şifreleme (public key cryptographic) algoritması, genellikle RSA ya da DSA, kullanılarak oluşturulur.
+            En genel haliyle SSH anahtarları bir matematik formülü kullanılarak oluşturulan bir dizidir.
+            Genellikle iki tane asal sayı ve rastgele bir tohum (seed) numarası kullanılarak iki tane (genel ve özel) anahtar oluşturulur.
+            Genel anahtar, özel anahtar kullanılarak bulunabilir. Ama, tam tersi geçerli değildir.
+            Çoğu git hostu SSH anahtarı oluşturmak için size bazı yollar gösterir. 
+        </p>
+
+        
+        <h3>Mac ve Linux İçin</h3>
+        
+        <p>
+            Bu iki işletim sisteminde de SSH anahtarı oluşturmak için gelişmiş konsol komutları barındırmaktadır.
+
+            <ol>
+                <li>
+                    Aşağıdaki komutu konsol pencerenizde yazarak SSH anahtarı oluşturmaya başlayın.
+                    <div class="console">
+                        ssh-keygen -t rsa -b 4096 -C "sizin-email@ornek.com"
+                    </div>
+                    Yukarıdaki komut verilen emaile göre bir SSH anahtarı oluşturur.
+                </li>
+                <li>
+                    Bu komutu kullandıktan sonra sizden anahtarı nereye kaydetmenizi istediğinizi soracaktır.
+                    Bir dosya yolu verebilir ya da direkt enter tuşuna basarak varsayılan dosyaya kaydedebilirsiniz.
+                    <div class="console"> > Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter] </div>
+                </li>
+                <li>
+                    Ardından sizden bir parola isteyecektir.
+                    Bu parolanın amacı biri cihazınıza el koyarsa özel anahtarınızın çalınmaması.
+                    <div class="console">
+                        > Enter passphrase (empty for no passphrase): [Type a passphrase]<br>
+                        > Enter same passphrase again: [Type passphrase again]
+                    </div>
+                </li>
+                <li>
+                    Son aşamamız oluşturduğumuz özel anahtarı ssh-agent programına eklemek.
+                    ssh-agent özel anahtarlarımızı tutan bir programdır.
+                    Eklemek için önce program açık mı test etmemiz lazım. Aşağıdaki komutu kullanarak bunu test edebiliriz:
+                    <div class="console">
+                        $ eval "$(ssh-agent -s)"<br>
+                        > Agent pid 59566
+                    </div>
+                    Emin olduktan sonra aşağıdaki komutu kullanarak ssh-agent programına özel anahtarımızı ekleyebiliriz (dosya yolunu önceki komutlardan unutmayınız):
+                    <div class="console">
+                        ssh-add -K /Users/you/.ssh/id_rsa
+                    </div>
+                </li>
+            </ol>
+
+            <h3>Windows İçin</h3>
+        
+            <p>
+                Windows ortamlarında standart bir varsayılan Unix kabuğu bulunmamaktadır. 
+                Tam bir anahtar oluşturma deneyimi için harici kabuk programlarının yüklenmesi gerekmektedir.
+                En basit seçenek, Git Bash'i kullanmaktır.
+                Git Bash yüklendikten sonra, aynı adımlar Linux ve Mac için olduğu gibi Git Bash kabuğu içinde izlenebilir.
+            </p>
+
+            <h3>Windows Linux Alt Sistemi</h3>
+
+            <p>
+                Modern Windows ortamları, Windows Linux Alt Sistemi'ni sunmaktadır.
+                Windows Linux Alt Sistemi, geleneksel bir Windows ortamında tam bir Linux kabuğu sunar.
+                Eğer bir Linux alt sistemi mevcutsa, önceki olarak tartışılan adımlar Linux ve Mac için olduğu gibi Windows Linux Alt Sistemi içinde uygulanabilir.
+            </p>
+        </p>
+    </body>
+    </html>
