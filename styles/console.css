@@ -1,0 +1,13 @@
+.console {
+    padding: 20px 40px;
+    margin: 25px auto;
+    width: 700px;
+    text-align: left;
+    display: block;
+    background-color: #091e42;
+    font-family: "Roboto Mono", sans-serif;
+}
+
+ol li {
+    margin-bottom: 10px;
+}

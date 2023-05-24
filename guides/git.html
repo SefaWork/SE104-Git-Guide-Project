@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Git Nedir ve Kurulumu</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guide.html">Dersler</a>
+            </div>
+        </div>
+
+        <img src="/images/git-icon.png" style="
+            display: block;
+            background-color: white;
+            margin: auto;
+            width: 40%;
+            padding: 20px 150px;
+            border: 3px solid #2e2e2e;
+        ">
+
+        <h1>Git Nedir?</h1>
+
+        <p>
+            Git, 2005 yılında başlatılan ve piyasadaki en popüler sürüm kontrol sistemlerden (VCS) biri haline gelen açık kaynaklı bir projedir. 
+            Bugün, geliştiricilerin ve yazılımcıların %86’sından fazlası projeleri için Git’i kullanmaktadır.
+            <br><br>
+            Git, dağıtılmış bir sürüm kontrol sistemidir.
+            Yani, erişim izni verilen ekipteki herhangi bir yazılımcı, Git komut satırı araçlarını (Git command line tools) kullanarak kaynak kodunu ve değişiklik geçmişini yönetebilir.
+            Bu nedenle ekip çalışmaları ve kişisel projeler için oldukça kullanışlıdır.
+            <br><br>
+
+            Git, merkezi sürüm kontrol sistemlerinden farklı olarak özellik dalları (feature branches) sunar. 
+            Bu, ekipteki her yazılımcının kodda değişiklik yapmak için yalıtılmış bir yerel depo sağlayan bir özellik dalını ayırabileceği anlamına gelir.
+            Bu özellik dalları projenin ana dalını (master/origin) etkilemez.
+            Güncellenen kod hazır olduğunda özellik dalı ana dal ile birleştirilebilir ve değişiklikler böylece etkin olur.
+        </p>
+
+        <h1>Git Nasıl Kurulur?</h1>
+        
+        <h2>Windows için Git Yükleyicisi</h2>
+
+        <p>
+            <ol>
+                <li>
+                    En güncel <a href="https://gitforwindows.org/">Windows için Git Yükleyicisini</a> indirin.
+                </li>
+                <li>
+                    Yükleyicideki aşamaları takip ediniz. Varsayılan ayarlar neredeyse tüm kullanıcılar için yeterlidir.
+                </li>
+                <li>
+                    Komut İstemi (ya da Powershell) penceresini açınız ve aşağıdaki resimdeki komutları kullanarak hesap detaylarınızı giriniz.
+                    Bu detaylar kimin "commit" yaptığını belirtir.
+                    <div class="console">
+                        $ git config --global user.name "Emma Paris"<br>
+                        $ git config --global user.email "eparis@atlassian.com"
+                    </div>
+                </li>
+            </ol>
+        </p>
+
+        <h2>Mac OS X için Kurulum</h2>
+
+        <p>
+            Mac OS X için git kurmanın birkaç yolu vardır. 
+            Bunları denemeden önce, özellikle XCode indirmişseniz, git zaten yüklü mü test etmelisiniz. 
+            Bu oldukça basit bir komut ile gözlenebilir.
+            Konsol ekranını açınız ve "git --version" yazınız.
+            <div class="console">
+                $ git --version<br>
+                git version 2.7.0 (Apple Git-66)
+            </div>
+
+            Eğer yukardaki gibi bir mesaj alıyorsanız git yüklü demektir.
+            Bazı nedenlerle Mac üzerindeki git güncel olmayabilir.
+            Aşağıdaki metotları kullanarak git indirebilir ve güncelleyebilirsiniz.
+        </p>
+
+        <h2>Mac için Git Yükleyicisi</h2>
+
+        <p>
+            Mac için git yüklemenin en kolay yolu yükleyiciyi kullanmaktır.
+            <ol>
+                <li>
+                    En güncel <a href="https://sourceforge.net/projects/git-osx-installer/files/" target="_blank">Mac için Git yükleyiciyi</a> indiriniz.
+                </li>
+                <li>
+                    Yükleyiciyi açtıktan sonra verilen aşamaları takip ediniz.
+                </li>
+                <li>
+                    Konsol ekranını açınız ve aşağıdaki komut ile git başarıyla yüklendi mi kontrol ediniz.
+                    <div class="console">
+                        $ git --version<br>
+                        git version 2.9.2
+                    </div>
+                </li>
+                <li>
+                    Eğer verilen mesaj yukarıdaki resimdeki gibi ise git hesabınızın detaylarını girme zamanınız gelmiştir.
+                    Hesap detaylarınız her yaptığınız commit ile alakalıdır.
+                    Aşağıdaki komutları kullanarak hesap detaylarınızı giriniz.
+                    <div class="console">
+                        $ git config --global user.name "Emma Paris"<br>
+                        $ git config --global user.email "eparis@atlassian.com"
+                    </div>
+                </li>
+            </ol>
+        </p>
+
+        <h2>Homebrew Kullanarak Kurulum</h2>
+
+        <p>
+            Eğer <a href="https://brew.sh/" target="_blank">Homebrew kullanıyorsanız</a> aşağıdaki aşamaları takip ederek git indirebilirsiniz:
+            <ol>
+                <li>
+                    Konsol penceresini açınız ve Homebrew ile git yükleyiniz:
+                    <div class="console"> $ brew install git </div>
+                </li>
+                <li>
+                    Konsol penceresinde aşağıdaki komut ile git başarıyla yüklendi mi kontrol ediniz.
+                    <div class="console">
+                        $ git --version<br>
+                        git version 2.9.2
+                    </div>
+                </li>
+                <li>
+                    Konsol penceresinde aşağıdaki resimdeki komutları kullanarak hesap detaylarınızı giriniz.
+                    Bu detaylar kimin "commit" yaptığını belirtir.
+                    <div class="console">
+                        $ git config --global user.name "Emma Paris"<br>
+                        $ git config --global user.email "eparis@atlassian.com"
+                    </div>
+                </li>
+            </ol>
+        </p>
+
+        <h2>Linux için Git Kurulumu</h2>
+        <h3>Debian/Ubuntu Tabanlı Sistemler İçin</h3>
+
+        <p>
+            <ol>
+                <li>
+                    Shell penceresini açınız ve apt-get komutunu kullanarak git indiriniz:
+                    <div class="console">
+                        $ sudo apt-get update<br>
+                        $ sudo apt-get install git
+                    </div>
+                </li>
+
+                <li>
+                    Shell penceresinde aşağıdaki komut ile git başarıyla yüklendi mi kontrol ediniz.
+                    <div class="console">
+                        $ git --version<br>
+                        git version 2.9.2
+                    </div>
+                </li>
+
+                <li>
+                    Shell penceresinde aşağıdaki resimdeki komutları kullanarak hesap detaylarınızı giriniz.
+                    Bu detaylar kimin "commit" yaptığını belirtir.
+                    <div class="console">
+                        $ git config --global user.name "Emma Paris"<br>
+                        $ git config --global user.email "eparis@atlassian.com"
+                    </div>
+                </li>
+            </ol>
+        </p>
+
+        <h3>Fedora (dnf/yum)</h3>
+
+        <p>
+            Git paketleri hem yum hem de dnd ile indirilebilir.
+            <ol>
+                <li>
+                    Shell penceresini açınız ve dnf (ya da yum) komutunu kullanarak git indiriniz:
+                    <div class="console">
+                        $ sudo dnf install git
+                    </div>
+
+                    ya da
+
+                    <div class="console">
+                        $ sudo yum install git
+                    </div>
+                </li>
+                <li>
+                    İndirme başarılı oldu mu kontrol etmek için aşağıdaki komutu kullanınız:
+
+                    <div class="console">
+                        $ git --version<br>
+                        git version 2.9.2
+                    </div>
+                </li>
+                <li>
+                    Shell penceresinde aşağıdaki resimdeki komutları kullanarak hesap detaylarınızı giriniz.
+                    Bu detaylar kimin "commit" yaptığını belirtir.
+                    <div class="console">
+                        $ git config --global user.name "Emma Paris"<br>
+                        $ git config --global user.email "eparis@atlassian.com"
+                    </div>
+                </li>
+            </ol>
+        </p>
+    </body>
+</html>
