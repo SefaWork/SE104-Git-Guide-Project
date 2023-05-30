@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Respository Kurulumu</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="/guides/" class="next-page">Sonraki Ders >></a>
+        </div>
+        <h1>Git Respository Nedir?</h1>
+
+        <p>
+            Bir Git Repository, projeleriniz için hazıranmış görsel bir depolama alanıdır. 
+            Kodlarınızın farklı versiyonlarını kaydetmenizi ve ihtiyaç anında kullanabilmenizi sağlar.
+        </p>
+        <b1></b1>
+
+        <h2>Yeni respository başlatma: Git init</h2>
+        <p>
+            Yeni bir depo (respository) başlatmak için git init konutu kullanılır. 
+            Bu komut, yeni bir deponun kurulumu sırasında kullanılan tek seferlik bir komuttur. 
+            Bunu yürütmek mevcut çalışmanızda yeni bir .git alt dizini yaratacaktır. 
+            Aynı zamanda yeni bir main branch oluşturur.
+        
+        </p>
+        <div class="console">
+            cd /path/to/your/existing/code
+            git init
+        </div>
+        <h2>Mevcut Projeyi yeni bir git deposuyla sürümleme</h2>
+        <p>
+            Bir proje zaten varolan merkezi bir repository de ayarlanmışsa,
+            kullanıcıların yerel bir geliştirme klonu elde etmesinin en yaygın yolu clone komutudur. 
+            Git init gibi clone da genellikle tek seferlik bir işlemdir. 
+            Bir geliştirici çalışan bir kopya elde ettikten sonra, 
+            tüm sürüm kontrol işlemleri kendi yerel depoları aracılığı ile yönetilir.
+        </p>
+        <div class="console">
+            git clone < repo url >
+        </div>
+        <p>
+            Git clone, uzak depoların bir kopyasını veya klonunu oluşturmak için kullanılır.
+            Gir clone'a bir havuz URL'si iletilir. Git, birkaç farklı ağ protokolünü ve  ilgili URL biçimini destekler.
+            Bu örnekte Git SSH protokolü kullanılmıştır. Git SSH URL'leri şu şablona uygundur;
+            git@HOSTNAME:USERNAME/REPONAME.git
+
+        </p>
+        <div class="console">
+            örnek bir Git SSH URL şu şekilde olur: git@bitbucket.org:rhyolight/javascript-data-store.git 
+
+            HOSTNAME: bitbucket.org
+            USERNAME: rhyolight
+            REPONAME: javascript-data-store
+        </div>
+        <p>
+            Yürütüldüğünde, ana subedeki uzak depo dosyalarının en son sürümü aşağı çekilecek ve yeni bir klosöre eklenecektir. 
+            Yeni klasör, bu durumda javascript-data-store'dan sonra REPONAME olarak adlandırılacaktır. 
+            Klasör, uzak havuzun tam geçmişini ve yeni oluşturulan bir ana dalı içerecektir.   
+        </p>
+        <h2>Repository'deki değişikleri kaydetme: Git add ve git commit</h2>
+        <p>
+            Artık klonlanmış veya başlatılmış bir havuzunuz olduğuna göre, ona dosya sürümü değişiklikleri uygulayabilirsiniz. 
+            Aşağıdaki örnek, /path/to/project konumunda bir proje kurduğunuzu varsayar. 
+            Bu örnekte atılan adımlar şu şekildedir:
+
+        </p>
+        <div class="console">
+            Change directories to /path/to/project
+            Create a new file CommitTest.txt with contents ~"test content for git tutorial"~
+            git add CommitTest.txt to the repository staging area
+            Create a new commit with a message describing what work was done in the commit
+        </div>
+        <div class="console">
+            cd /path/to/project 
+            echo "test content for git tutorial" >> CommitTest.txt 
+            git add CommitTest.txt 
+            git commit -m "added CommitTest.txt to the repo"
+        </div>
+        <p>
+            Bu örneği yürüttükten sonra, deponuz artık geçmişe CommitTest.txt ekleyecek ve 
+            dosyanın gelecekteki güncellemelerini izleyecektir.
+        </p>
+        <h2>Repo-Repo işbirliği: Git Push</h2>
+        <p>
+            Git'in "çalışan kopya" fikrinin, bir SVN deposundan kaynak kodunu kontrol ederek 
+            elde ettiğimiz çalışan kopyadan çok farklı olduğunu anlamak önemlidir. SVN'den farklı 
+            olarak Git, çalışan kopyalar ile merkezi depo arasında içbir ayrım yapmaz; bunların tümü 
+            Git depolarıdır.
+
+            Bu, Git ile işbirliğini SVN'den temelde farklı kılar. 
+            Çünkü SVN, merkezi depo ile çalışan kopya arasındaki ilişkiye bağlıdır.
+            Gir'in işbirliği modeli, havuzdan depoya etkileşimi temel alır. Çalışan bir kopyayı
+            SVN'nin merkezi deposunda kontrol etmek yerine, bir depodan diğerine commitleri gönderir 
+            ve çekersiniz. 
+
+            Elbette, sizi belirli Git depolarına özel bir anlam vermekten alıkoyan hiçbir şey yoktur. 
+            Örneğin bir git deposunu merkezi depo olarak belirleyerek, merkezi bir iş akışını çoğaltmak 
+            mümkündür.Bu VCS'nin kendisine fiziksel olarak bağlanmak yerine kurallar aracılığı ile gerçekleşir.
+        </p>
+        <p>
+            Yerel Respority'nizi kurmak için "git clone" kullandıysanız, deponuz zaten uzaktan bir işbirliği 
+            için yapılandırılmıştır. Git clone, reponuzu klonladığınız Git URL'sine işaret eden bir uzaktan 
+            kumandayla otomatik olarak yapılandırılır. Bu, bir dosyada değişiklik yaptığınızda ve bunları kaydettiğinizde,
+            bu değişiklikleri uzak repository ye gönderebileceğiniz anlamına gelir. 
+
+            Yeni bir repository oluşturmak için Git init'i kullandıysanız, değişiklikleri itmek için 
+            uzak bir deponuz olmaz. Yeni bir depo başlatırken yaygın bir model, Bitbucket gibi barındırılan 
+            bir git hizmetine gidip orada depo oluşturmaktır. Hizmet, daha sonra yerel Git deponuza ekleyebileceğiniz
+            ve barındırılan depoya git push gönderebileceğiniz bit Git URL'si sağlayacaktır. Seçtiğiniz hizmetle bir uzaktan 
+            depo oluşturduktan sonra, yerel deponuzu bir eşleşme ile güncellemeniz gerekecektir. Bu sürec
+            aşağıdaki Yapılandırma ve Kurulum kısmında ele alınmıştır.
+        </p>
+        <h2>Yapılandırma ve Kurulum: Git Config </h2>
+        <p>
+            Bir uzak depo kurulumunuz olduğunda, yerel git yapılandırmanıza bir uzak repo url'si
+            eklemeniz ve yerel subeleriniz için bir yukarı akış subesi atyarlamanız gerekir. Git remote
+            komutu böyle bir hizmet sunar:
+        </p>
+        <div class="console">
+            git  remote  add  < remote_name > < remote_repo_url >< / remote_repo_url >
+        </div>
+        <p>
+            Bu komut, uzak depoyu altındaki yerel deponuzdaki bir ref ile eşleyecektir. Uzak depoyu 
+            eşledikten sonra yerel dalları ona gönderebilirsinz.
+        </p>
+        <div class="console">
+            git push -u < remote_name> < local_branch_name>< /local_branch_name>
+        </div>
+        <p>
+            Bu komut, < local_branch_name > altındaki yerel repo şubesini < remote_name > adresindeki uzak repoya itecektir.
+            Bir uzak depo URL'si yapılandırmaya ek olarak, kullanıcı adı veya e-posta gibi genel Git yapılandırma 
+            seçeneklerini de ayarlamanız gerekebilir. git config komutu, Git kurulumunuzu (veya ayrı bir depoyu) komut satırından 
+            yapılandırmanıza olanak tanır. Bu komut, kullanıcı bilgisinden tercihlere ve bir havuzun davranışına kadar her şeyi 
+            tanımlayabilir. Birkaç yaygın yapılandırma seçeneği aşağıda listelenmiştir.
+
+            Git, yapılandırma seçeneklerini üç ayrı dosyada saklar; bu, seçenekleri tek tek havuzlara (yerel),
+            kullanıcıya (Global) veya tüm sisteme (sistem) göre kapsamlandırmanıza olanak tanır:
+            
+            Yerel: /.git/config – Havuza özel ayarlar.
+            Global: /.gitconfig – Kullanıcıya özel ayarlar. --global bayrağıyla ayarlanan seçeneklerin saklandığı yer burasıdır.
+            Sistem: $(prefix)/etc/gitconfig – Sistem genelinde ayarlar.
+        </p>
+        <div class="console">
+            git config --global user.name <name>
+
+        </div>
+        <p>
+            Geçerli kullanıcı tarafından tüm commitler için kullanılacak yazar adını tanımlayın.
+            --local seçeneğinin eklenmesi veya bir yapılandırma düzeyi seçeneğinin hiç iletilmemesi, 
+            geçerli yerel depo için user.name ayarlayacaktır.
+        </p>
+        <div class="console">
+            git config --local user.email <email></email>
+        </div>
+        <p>
+            Geçerli kullanıcı tarafından tüm commitler için kullanılacak yazar e-postasını tanımlayın.
+        </p>
+        <div class="console">
+            git config --global alias.<alias-name> <git-command></git-command>
+        </div>
+        <p>
+            Git komutu için bir kısayol oluşturun. 
+            Bu, yaygın olarak kullanılan git komutları için özel kısayollar 
+            oluşturmak için güçlü bir yardımcı programdır. Basit bir örnek şöyle olacaktır:
+        </p>
+        <div class="console">
+            git config --global alias.ci commit
+        </div>
+        <p>
+            Bu, git commitinin kısayolu olarak yürütebileceğiniz bir ci komutu oluşturur.
+        </p>
+        <div class="console">
+            git config --system core.editor <editor></editor>
+        </div>
+        <p>
+            Geçerli makinedeki tüm kullanıcılar için git commit gibi komutlar tarafından 
+            kullanılan metin düzenleyiciyi tanımlayın. < editor > bağımsız değişkeni, 
+            istenen düzenleyiciyi (örn. vi) başlatan komut olmalıdır. Bu örnek, --system seçeneğini tanıtır. 
+            --system seçeneği, tüm sistem için, yani bir makinedeki tüm kullanıcılar ve depolar için yapılandırmayı ayarlayacaktır.
+        </p>
+        <div class="console">
+            git config --global --edit
+        </div>
+        <p>
+            Manuel düzenleme için genel yapılandırma dosyasını bir metin düzenleyicide açın
+        </p>
+
+
+
+    </body>
+</html>
