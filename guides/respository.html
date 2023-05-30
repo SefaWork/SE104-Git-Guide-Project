@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Respository Kurulumu</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="/guides/" class="next-page">Sonraki Ders >></a>
+        </div>
+        <h1>Git Respository Nedir?</h1>
+
+        <p>
+            Bir Git Repository, projeleriniz için hazıranmış görsel bir depolama alanıdır. 
+            Kodlarınızın farklı versiyonlarını kaydetmenizi ve ihtiyaç anında kullanabilmenizi sağlar.
+        </p>
+        <b1></b1>
+
+        <h2>Yeni respository başlatma: Git init</h2>
+        <p>
+            Yeni bir depo (respository) başlatmak için git init konutu kullanılır. 
+            Bu komut, yeni bir deponun kurulumu sırasında kullanılan tek seferlik bir komuttur. 
+            Bunu yürütmek mevcut çalışmanızda yeni bir .git alt dizini yaratacaktır. 
+            Aynı zamanda yeni bir main branch oluşturur.
+        
+        </p>
+        <div class="console">
+            cd /path/to/your/existing/code
+            git init
+        </div>
+        <h3>Mevcut Projeyi yeni bir git deposuyla sürümleme</h3>
+        <p>
+            Bir proje zaten varolan merkezi bir repository de ayarlanmışsa,
+            kullanıcıların yerel bir geliştirme klonu elde etmesinin en yaygın yolu clone komutudur. 
+            Git init gibi clone da genellikle tek seferlik bir işlemdir. 
+            Bir geliştirici çalışan bir kopya elde ettikten sonra, 
+            tüm sürüm kontrol işlemleri kendi yerel depoları aracılığı ile yönetilir.
+        </p>
+        <div class="console">
+            git clone < repo url >
+        </div>
+        <p>
+            Git clone, uzak depoların bir kopyasını veya klonunu oluşturmak için kullanılır.
+            Gir clone'a bir havuz URL'si iletilir. Git, birkaç farklı ağ protokolünü ve  ilgili URL biçimini destekler.
+            Bu örnekte Git SSH protokolü kullanılmıştır. Git SSH URL'leri şu şablona uygundur;
+            git@HOSTNAME:USERNAME/REPONAME.git
+
+        </p>
+        <div class="console">
+            örnek bir Git SSH URL şu şekilde olur: git@bitbucket.org:rhyolight/javascript-data-store.git 
+
+            HOSTNAME: bitbucket.org
+            USERNAME: rhyolight
+            REPONAME: javascript-data-store
+        </div>
+        <p>
+            Yürütüldüğünde, ana subedeki uzak depo dosyalarının en son sürümü aşağı çekilecek ve yeni bir klosöre eklenecektir. 
+            Yeni klasör, bu durumda javascript-data-store'dan sonra REPONAME olarak adlandırılacaktır. 
+            Klasör, uzak havuzun tam geçmişini ve yeni oluşturulan bir ana dalı içerecektir.   
+        </p>
+
+    </body>
+</html>
