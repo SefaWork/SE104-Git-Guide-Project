@@ -518,20 +518,281 @@
         <div class="console">
             git diff main new_branch ./diff_test.txt
         </div>
+         <h1>Git Stash</h1>
+        <p>
+            git stash, başka bir şey üzerinde çalışabilmeniz için çalışma 
+            kopyanızda yaptığınız değişiklikleri geçici olarak rafa kaldırır 
+            (veya saklar) ve daha sonra geri gelip bunları yeniden uygulayabilirsiniz. 
+            Saklama, hızlı bir şekilde içerik değiştirmeniz ve başka bir şey üzerinde 
+            çalışmanız gerekiyorsa kullanışlıdır, ancak bir kod değişikliğinin ortasındasınız ve 
+            işlemeye tam olarak hazır değilsiniz.
+        </p>
+        <h2>Dosyanızı Stash'lamak</h2>
+        <p>
+            git stash komutu, commit edilmemiş değişikliklerinizi (hem aşamalı hem de hazırlıksız) 
+            alır, daha sonra kullanmak üzere saklar ve ardından çalışan kopyanızdan geri döndürür. Örneğin:
+        </p>
+        <div class="console">
+            $ git status
+            On branch main
+            Changes to be committed:
+
+            new file:   style.css
+
+            Changes not staged for commit:
+
+            modified:   index.html
+
+            $ git stash
+            Saved working directory and index state WIP on main: 5002d47 our new homepage
+            HEAD is now at 5002d47 our new homepage
+
+            $ git status
+            On branch main
+            nothing to commit, working tree clean
+        </div>
+        <p>
+            Bu noktada değişiklik yapmakta, yeni commitler oluşturmakta, 
+            stashlar arasında geçiş yapmakta ve diğer Git işlemlerini gerçekleştirmekte özgürsünüz; 
+            sonra geri gelin ve hazır olduğunuzda stashınızı yeniden uygulayın.
+            Stashın Git reponuz için yerel olduğunu unutmayın; Bastığınızda depolar sunucuya aktarılmaz.
+        </p>
+        <h2>Stash edilmiş değişiklikleri tekrar uygulamak</h2>
+        <p>
+            Önceden saklanan değişiklikleri git stash pop ile yeniden uygulayabilirsiniz:
+        </p>
+        <div class="console">
+            $ git status
+            On branch main
+            nothing to commit, working tree clean
+            $ git stash pop
+            On branch main
+            Changes to be committed:
+
+                new file:   style.css
+
+            Changes not staged for commit:
+
+                modified:   index.html
+
+            Dropped refs/stash@{0} (32b3aa1d185dfe6d57b3c3cc3b32cbf3e380cc6a)
+        </div>
+        <p>
+            Stashınızı açar, değişiklikleri Stash tan kaldırır ve onları çalışan kopyanıza yeniden uygular.
+            Alternatif olarak, değişiklikleri çalışan kopyanıza yeniden uygulayabilir ve bunları 
+            git stash Apply ile Stashınızda tutabilirsiniz:
+        </p>
+        <div class="console">
+            $ git stash apply
+            On branch main
+            Changes to be committed:
+
+                new file:   style.css
+
+            Changes not staged for commit:
+
+                modified:   index.html
+        </div>
+        <p>
+            Aynı saklanmış değişiklikleri birden fazla branch'a uygulamak istiyorsanız bu kullanışlıdır.
+            Artık saklamanın temellerini bildiğinize göre, git stash ile ilgili bilmeniz gereken bir uyarı var: 
+            varsayılan olarak Git, izlenmeyen veya göz ardı edilen dosyalarda yapılan değişiklikleri saklamaz.
+        </p>
+        <h3>İzlenmeyen veya gizlenen dosyaları Stash etmek</h3>
+        <p>
+            By default, running git stash will stash:
+
+            changes that have been added to your index (staged changes)
+            changes made to files that are currently tracked by Git (unstaged changes)
+            But it will not stash:
+
+            new files in your working copy that have not yet been staged
+            files that have been ignored
+            So if we add a third file to our example above, but don't stage it 
+            (i.e. we don't run git add), git stash won't stash it.
+        </p>
+        <div class="console">
+            $ script.js
+
+            $ git status
+            On branch main
+            Changes to be committed:
+
+                new file:   style.css
+
+            Changes not staged for commit:
+
+                 modified:   index.html
+
+            Untracked files:
+
+                script.js
+
+            $ git stash
+            Saved working directory and index state WIP on main: 5002d47 our new homepage
+            HEAD is now at 5002d47 our new homepage
+
+            $ git status
+            On branch main
+            ntracked files:
+
+                script.js
+        </div>
+        <p>
+            -u seçeneğinin (veya --include-untracked) eklenmesi, git stash'a izlenmeyen dosyalarınızı da saklamasını söyler:
+        </p>
+        <div class="console">
+            $ git status
+            On branch main
+            Changes to be committed:
+
+                new file:   style.css
+
+            Changes not staged for commit:
+
+                modified:   index.html
+
+            Untracked files:
+
+                script.js
+
+            $ git stash -u
+            Saved working directory and index state WIP on main: 5002d47 our new homepage
+            HEAD is now at 5002d47 our new homepage
+
+            $ git status
+            On branch main
+            nothing to commit, working tree clean
+        </div>
+        <p>
+            Git stash'ı çalıştırırken -a seçeneğini (veya --all) ileterek yok sayılan dosyalara da değişiklikler ekleyebilirsiniz.
+        </p>
+        <h2>Birden fazla Stash'ı yönetmek</h2> 
+        <p>
+            Tek bir Stash ile sınırlı değilsiniz. Birden çok depo oluşturmak için git stash'ı 
+            birkaç kez çalıştırabilir ve ardından bunları görüntülemek için git stash list'i 
+            kullanabilirsiniz. Varsayılan olarak, Stashlar, şubenin üstünde basitçe bir "WIP" 
+            (devam eden çalışma) olarak tanımlanır ve Stashı nereden oluşturduğunuzu commit eder. 
+            Bir süre sonra her stashın ne içerdiğini hatırlamak zor olabilir:
+        </p>
+        <div class="console">
+            $ git stash list
+            stash@{0}: WIP on main: 5002d47 our new homepage
+            stash@{1}: WIP on main: 5002d47 our new homepage
+            stash@{2}: WIP on main: 5002d47 our new homepage
+        </div>
+        <p>
+            Biraz daha bağlam sağlamak için, git stash save "message" kullanarak stashlarınıza bir açıklama eklemek iyi bir uygulamadır:
+        </p>
+        <div class="console">
+            $ git stash save "add style to our site"
+            Saved working directory and index state On main: add style to our site
+            HEAD is now at 5002d47 our new homepage
+
+            $ git stash list
+            stash@{0}: On main: add style to our site
+            stash@{1}: WIP on main: 5002d47 our new homepage
+            stash@{2}: WIP on main: 5002d47 our new homepage
+        </div>
+        <p>
+            By default, git stash pop will re-apply the most recently created stash: stash@{0}
+
+            You can choose which stash to re-apply by passing its identifier as the last argument, for example:
+        </p>
+        <div class="console">
+            $ git stash pop stash@{2}
+        </div>
+        <h2>Stash Diff'lerini görüntüleme</h2>
+        <p>
+            Bir Stash'ın özetini git stash show ile görüntüleyebilirsiniz:
+        </p>
+        <div class="console">
+            $ git stash show
+            index.html | 1 +
+            style.css | 3 +++
+            2 files changed, 4 insertions(+)
+        </div>
+        <p>
+            Veya bir stashın tam farkını görüntülemek için -p seçeneğini (veya --patch) iletin:
+        </p>
+
+        <div class="console">
+            $ git stash show -p
+            diff --git a/style.css b/style.css
+            new file mode 100644
+            index 0000000..d92368b
+            --- /dev/null
+            +++ b/style.css
+            @@ -0,0 +1,3 @@
+            +* {
+            +  text-decoration: blink;
+            +}
+            diff --git a/index.html b/index.html
+            index 9daeafb..ebdcbd2 100644
+            --- a/index.html
+            +++ b/index.html
+            @@ -1 +1,2 @@
+            +< link rel="stylesheet" href="style.css"/ >
+        </div>
+        <h2>Kısmi Stash</h2>
+        <p>
+            Ayrıca, yalnızca tek bir dosyayı, bir dosya koleksiyonunu veya dosyaların içindeki 
+            bireysel değişiklikleri saklamayı da seçebilirsiniz. -p seçeneğini (veya --patch) git 
+            stash'a iletirseniz, çalışma kopyanızdaki değiştirilen her "parça"yı yineleyecek ve saklamak 
+            isteyip istemediğinizi soracaktır:
+        </p>
+        <div class="console">
+            $ git stash -p
+            diff --git a/style.css b/style.css
+            new file mode 100644
+            index 0000000..d92368b
+            --- /dev/null
+            +++ b/style.css
+            @@ -0,0 +1,3 @@
+            +* {
+            +  text-decoration: blink;
+            +}
+            Stash this hunk [y,n,q,a,d,/,e,?]? y
+            diff --git a/index.html b/index.html
+            index 9daeafb..ebdcbd2 100644
+            --- a/index.html
+            +++ b/index.html
+            @@ -1 +1,2 @@
+            +< link rel="stylesheet" href="style.css"/>
+            Stash this hunk [y,n,q,a,d,/,e,?]? n
+        </div>
+        <h1>.gitignore</h1>
+        <p>
+            Git, çalışma kopyanızdaki her dosyayı üç şeyden biri olarak görür:
+
+            izlenen - önceden hazırlanmış veya işlenmiş bir dosya;
+            izlenmemiş - hazırlanmamış veya işlenmemiş bir dosya; veya
+            yoksayıldı - Git'in açıkça yok sayması söylendiği bir dosya.
+        </p>
+        <p>
+            Yoksayılan dosyalar genellikle, depo kaynağınızdan türetilebilen veya başka bir şekilde işlenmemesi gereken derleme yapıları ve makine tarafından oluşturulan dosyalardır. Bazı yaygın örnekler şunlardır:
+
+            /node_modules veya /packages içerikleri gibi bağımlılık önbellekleri
+            .o, .pyc ve .class dosyaları gibi derlenmiş kod
+            /bin, /out veya /target gibi çıktı dizinleri oluşturun
+            .log, .lock veya .tmp gibi çalışma zamanında oluşturulan dosyalar
+            .DS_Store veya Thumbs.db gibi gizli sistem dosyaları
+            .idea/workspace.xml gibi kişisel IDE yapılandırma dosyaları
+        </p>
+        <p>
+            yok sayılan dosyalar, havuzunuzun kök dizininde teslim edilen 
+            .gitignore adlı özel bir dosyada izlenir. Açık bir git yoksay komutu 
+            yoktur: bunun yerine, yoksaymak istediğiniz yeni dosyalarınız olduğunda 
+            .gitignore dosyası elle düzenlenmeli ve işlenmelidir. .gitignore dosyaları, 
+            göz ardı edilip edilmeyeceklerini belirlemek için deponuzdaki dosya adlarıyla 
+            eşleşen kalıplar içerir.
+        </p>
+        <p>
+            <a href="https://www.atlassian.com/git/tutorials/saving-changes/gitignore">Atlassian sitesinde</a> verilen tabloda 
+            .gitignore için verilen kalıpları inceleyebilirsiniz.
+        </p>
 
         
-
-
-
-
-
-
-
-
-
-
-
-
 
     </body>
     
