@@ -1,0 +1,539 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>Değişiklikleri Kaydetme</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="/guides/" class="next-page">Sonraki Ders >></a>
+        </div>
+        <h1>Değişiklikleri Kaydetme</h1>
+        
+        <p>
+            Git'te veya diğer sürüm kontrol sistemlerinde çalışırken, "kaydetme" kavramı, 
+            bir kelime işlemcide veya diğer geleneksel dosya düzenleme uygulamalarında kaydetmekten 
+            daha incelikli bir süreçtir. "Kaydetme"nin geleneksel yazılım ifadesi Git'teki "commit" 
+            terimiyle eşanlamlıdır. Bir commit, "kaydet"in Git eşdeğeridir. Geleneksel kaydetme, 
+            mevcut bir dosyanın üzerine yazmak veya yeni bir dosya yazmak için kullanılan bir dosya 
+            sistemi işlemi olarak düşünülmelidir. Alternatif olarak, Git taahhüt, bir dosya ve 
+            dizin koleksiyonu üzerinde hareket eden bir işlemdir.
+
+        </p>
+        <p>
+            Git ve SVN'deki değişiklikleri kaydetmek de farklı bir işlemdir. 
+            SVN commitleri veya 'check-in'ler', merkezi bir sunucuya uzaktan itme yapan işlemlerdir. 
+            Bu, bir SVN commitinin proje değişikliklerini tamamen 'kaydetmek' için İnternet erişimine 
+            ihtiyaç duyduğu anlamına gelir. Git commitleri yerel olarak yakalanıp oluşturulabilir, 
+            ardından git push -u Origin main komutu kullanılarak gerektiğinde uzak bir sunucuya gönderilebilir. 
+            İki yöntem arasındaki fark, mimari tasarımlar arasındaki temel farktır. Git, dağıtılmış bir uygulama modelidir, 
+            SVN ise merkezi bir modeldir. Dağıtılmış uygulamalar, merkezi bir sunucu gibi tek bir arıza 
+            noktasına sahip olmadıkları için genellikle daha sağlamdır.
+        </p>
+        <p>
+            Git'in "teh stash" adı verilen ek bir kaydetme mekanizması vardır. 
+            stash, commit edilmeye hazır olmayan değişiklikler için geçici bir depolama 
+            alanıdır. stash, üç ağaçtan ilki olan çalışma dizini üzerinde çalışır ve geniş 
+            kullanım seçeneklerine sahiptir. 
+        </p>
+        <p>
+            Bir Git Raspository'si, belirli dosya veya dizinleri yok sayacak şekilde yapılandırılabilir. 
+            Bu, Git'in yok sayılan herhangi bir içerikteki değişiklikleri kaydetmesini engelleyecektir. 
+            Git, yok sayma listesini yöneten birden çok yapılandırma yöntemine sahiptir. 
+
+        </p>
+        <h1>Git Add</h1>
+        <p>
+            git add komutu, çalışma dizinindeki bir değişikliği hazırlama alanına ekler. 
+            Git'e, bir sonraki işlemde belirli bir dosyaya yönelik güncellemeleri dahil etmek istediğinizi söyler. 
+            Bununla birlikte, git add, depoyu gerçekten önemli bir şekilde etkilemez; 
+            siz git commit'i çalıştırana kadar değişiklikler gerçekten kaydedilmez.
+        </p>
+        <h2>Nasıl Çalışır?</h2>
+        <p>
+            git add ve git commit komutları, temel Git iş akışını oluşturur. 
+            Bunlar, ekiplerinin işbirliği modelinden bağımsız olarak her Git kullanıcısının anlaması 
+            gereken iki komuttur. Bir projenin sürümlerini raspository geçmişine kaydetmenin araçlarıdır.
+
+        <p>
+            Bir proje geliştirmek, temel düzenleme/stage/commit modeli etrafında döner. 
+            İlk olarak, dosyalarınızı çalışma dizininde düzenlersiniz. Projenin mevcut durumunun bir 
+            kopyasını kaydetmeye hazır olduğunuzda, değişiklikleri git add ile aşamalandırırsınız. 
+            Aşamalı anlık görüntüden memnun kaldıktan sonra, bunu git commit ile proje geçmişine kaydedersiniz. 
+            Git reset komutu, bir işleme veya aşamalı anlık görüntüyü geri almak için kullanılır.
+        </p>
+        <p>
+            git add ve git commit'e ek olarak, eksiksiz bir işbirliğine dayalı Git iş akışı için 
+            üçüncü bir git push komutu gereklidir. git push, taahhüt edilen değişiklikleri işbirliği 
+            için uzak havuzlara göndermek için kullanılır. Bu, diğer ekip üyelerinin bir dizi 
+            kaydedilmiş değişikliğe erişmesini sağlar.
+        </p>
+        <p>
+            Git add komutu, depoya bir dosya ekleyen svn add ile karıştırılmamalıdır. 
+            Bunun yerine git add, değişikliklerin daha soyut düzeyinde çalışır. Bu, bir dosyayı 
+            her değiştirdiğinizde git add'in çağrılması gerektiği, oysa svn add'in her dosya 
+            için yalnızca bir kez çağrılması gerektiği anlamına gelir. Kulağa gereksiz gelebilir, 
+            ancak bu iş akışı, bir projeyi düzenli tutmayı çok daha kolaylaştırır.
+        </p>
+        </p>
+        
+        <h2>Staging Alanı</h2>
+        <p>
+            git add komutunun birincil işlevi, çalışma dizinindeki bekleyen değişiklikleri 
+            git hazırlama alanına ilerletmektir. Aşama alanı, Git'in daha benzersiz özelliklerinden 
+            biridir ve bir SVN (hatta bir Mercurial) geçmişinden geliyorsanız, kafanızı etrafına sarmak 
+            biraz zaman alabilir. Bunu çalışma dizini ile proje geçmişi arasında bir arabellek olarak 
+            düşünmek yardımcı olur. Hazırlama alanı, çalışma dizini ve işlem geçmişi ile birlikte Git'in 
+            "üç ağacından" biri olarak kabul edilir.
+
+
+        </p>
+        <p>
+            Stage, son işlemeden bu yana yaptığınız tüm değişiklikleri işlemek yerine, 
+            ilgili değişiklikleri proje geçmişine fiilen işlemeden önce yüksek oranda odaklanmış 
+            anlık görüntüler halinde gruplandırmanıza olanak tanır. Bu, ilgisiz dosyalarda her 
+            türlü düzenlemeyi yapabileceğiniz, ardından geri dönüp sahneye ilgili değişiklikleri 
+            ekleyerek bunları mantıksal taahhütlere ayırabileceğiniz ve bunları parça parça 
+            işleyebileceğiniz anlamına gelir. Herhangi bir revizyon kontrol sisteminde olduğu gibi, 
+            atomik taahhütler oluşturmak önemlidir, böylece projenin geri kalanı üzerinde minimum 
+            etki ile hataları takip etmek ve değişiklikleri geri almak kolaydır.
+        </p>
+        <h2>Bazı Kullanım Örnekleri</h2>
+        
+        <div class="console">
+            git add <file></file>
+
+        </div>
+        <p>
+            Bir sonraki commit için <file> içindeki tüm değişiklikleri hazırlayın.
+
+        </p>
+        <div class="console">
+            git add <directory></directory>
+        </div>
+        <p>
+            Bir sonraki commit için <directory> içindeki tüm değişiklikleri hazırlayın.
+
+        </p>
+        <div class="console">
+            git add -p
+        </div>
+        <p>
+            Bir sonraki işleme eklemek için bir dosyanın bölümlerini seçmenize izin veren 
+            etkileşimli bir hazırlık oturumu başlatın. Bu size bir yığın değişiklik sunacak ve 
+            sizden bir komut isteyecektir. Parçayı hazırlamak için y'yi, parçayı yoksaymak 
+            için n'yi, daha küçük parçalara bölmek için s'yi, parçayı el ile düzenlemek için 
+            e'yi ve çıkmak için q'yu kullanın.
+        </p>
+
+
+
+        <h1>Git Commit</h1>
+        <p>
+            git commit komutu, projenin o anda aşamalı değişikliklerinin anlık görüntüsünü yakalar. 
+            Kaydedilmiş anlık görüntüler, bir projenin "güvenli" sürümleri olarak düşünülebilir; 
+            siz açıkça istemediğiniz sürece Git bunları asla değiştirmez. Git commit yürütülmesinden önce 
+            git add komutu, projede bir commit depolanacak değişiklikleri desteklemek veya 
+            'stage' için kullanılır. Bu iki komut git commit ve git add en sık kullanılanlardan ikisidir.
+        </p>
+        <h2>Git commit ve SVN commit</h2>
+        <p>
+            Aynı adı paylaşsalar da git commit, svn commit gibi değildir. 
+            Bu paylaşılan terim, svn geçmişi olan Git'e yeni başlayanlar için bir kafa karışıklığı olabilir 
+            ve farkı vurgulamak önemlidir. Git commit ile svn commit karşılaştırmak, merkezi bir uygulama 
+            modeliyle (svn) dağıtılmış bir uygulama modeliyle (Git) karşılaştırmaktır. 
+            SVN'de bir commit, değişiklikleri yerel SVN istemcisinden uzak, merkezi, paylaşılan bir 
+            SVN deposuna iter. Git'te depolar dağıtılır, Anlık Görüntüler yerel depoya kaydedilir ve 
+            bu, diğer Git depolarıyla kesinlikle etkileşim gerektirmez. Git taahhütleri daha sonra isteğe 
+            bağlı uzak repository ye gönderilebilir.
+        </p>
+        <h1>Nasıl Çalışır?</h1>
+        <p>
+            Üst düzeyde, Git bir zaman çizelgesi yönetimi aracı olarak düşünülebilir. 
+            Commit, bir Git proje zaman çizelgesinin temel yapı taşı birimleridir. 
+            Commit, bir Git projesinin zaman çizelgesi boyunca anlık görüntüler veya kilometre 
+            taşları olarak düşünülebilir. Commit, bir projenin o andaki durumunu yakalamak 
+            için git commit komutuyla oluşturulur. Git Anlık Yedekleri her zaman yerel depoya 
+            kaydedilir. Bu, çalışan kopyanın merkezi depoya kaydedildiği SVN'den temel olarak farklıdır. 
+            Aksine Git, siz hazır olana kadar sizi merkezi depoyla etkileşim kurmaya zorlamaz. 
+            Hazırlama alanı, çalışma dizini ile proje geçmişi arasında bir tampon olduğu gibi, 
+            her geliştiricinin yerel deposu da katkıları ile merkezi depo arasında bir tampondur.
+        </p>
+        <p>
+            Bu, Git kullanıcıları için temel geliştirme modelini değiştirir. 
+            Git geliştiricileri, bir değişiklik yapmak ve bunu doğrudan merkezi depoya commit 
+            etmek yerine yerel depolarında commit biriktirme fırsatına sahip olur. Bunun SVN tarzı işbirliğine
+            göre birçok avantajı vardır: bir özelliği atomik commit ayırmayı, ilgili 
+            commitleri birlikte gruplandırmayı ve merkezi depoda yayınlamadan önce yerel geçmişi 
+            temizlemeyi kolaylaştırır. Ayrıca, geliştiricilerin yalıtılmış bir ortamda çalışmasına 
+            olanak tanır ve entegrasyonu diğer kullanıcılarla birleşmek için uygun bir noktaya gelene
+             kadar erteler. Tecrit ve ertelenmiş entegrasyon bireysel olarak faydalı olsa da, sık sık 
+             ve küçük birimler halinde entegrasyon bir ekibin yararınadır.
+        </p>
+        <h2>Anlık görüntüler, Farklılıklar değil</h2>
+        <p>
+            SVN ve Git arasındaki pratik farklılıkların yanı sıra, temel uygulamaları da 
+            tamamen farklı tasarım felsefelerini takip eder. SVN bir dosyanın farklılıklarını 
+            takip ederken, Git'in sürüm kontrol modeli anlık görüntülere dayalıdır. Örneğin,
+             bir SVN taahhüdü, depoya eklenen orijinal dosyaya kıyasla bir farktan oluşur. 
+             Öte yandan Git, her dosyanın tüm içeriğini her işlemde kaydeder.
+        </p>
+        <p>
+            Bu, birçok Git işlemini SVN'den çok daha hızlı hale getirir, 
+            çünkü bir dosyanın belirli bir sürümünün farklarından "birleştirilmesi" 
+            gerekmez; her dosyanın tam revizyonu Git'in dahili veritabanından hemen 
+            edinilebilir.
+            Git'in anlık görüntü modeli, dallanma ve birleştirme araçlarından işbirliği 
+            iş akışlarına kadar her şeyi etkileyerek sürüm kontrol modelinin neredeyse her 
+            yönü üzerinde geniş kapsamlı bir etkiye sahiptir.
+        </p>
+        <h2>Bazı Kullanım Örnekleri</h2>
+        <div class="console">
+            git commit
+        </div>
+        <p>
+            Aşamalı anlık görüntüyü commit edin. Bu, sizden bir commit mesajı isteyen 
+            bir metin düzenleyici başlatacaktır. Bir mesaj girdikten sonra, 
+            dosyayı kaydedin ve gerçek commit oluşturmak için düzenleyiciyi kapatın.
+        </p>
+        <div class="console">
+            git commit -a
+        </div>
+        <p>
+            Çalışma dizinindeki tüm değişikliklerin bir anlık görüntüsünü kaydedin. 
+            Bu, yalnızca izlenen dosyalarda yapılan değişiklikleri içerir (tarihlerinin bir noktasında git add ile eklenmiş olanlar).
+        </p>
+        <div class="console">
+            git commit -m "commit message"
+        </div>
+        <p>
+            Geçirilen bir kesinleştirme mesajıyla hemen bir kesinleştirme 
+            oluşturan bir kısayol komutu. Varsayılan olarak, git commit, 
+            yerel olarak yapılandırılmış metin düzenleyiciyi açar ve bir kesinleştirme 
+            mesajının girilmesini ister. -m seçeneğinin iletilmesi, bir satır içi mesaj 
+            lehine metin düzenleyici isteminden vazgeçecektir.
+        </p> 
+        <div class="console">
+            git commit -am "commit message"
+        </div>
+        <p>
+            -a ve -m seçeneklerini birleştiren uzman bir kullanıcı kısayol komutu. 
+            Bu birleşim, hemen tüm aşamalı değişiklikler için bir commit 
+            oluşturur ve bir satır içi commit mesajı alır.
+        </p>
+        <div class="console">
+            git commit --amend
+        </div>
+        <p>
+            Bu seçenek, commit komutuna başka bir işlevsellik düzeyi ekler. 
+            Bu seçeneğin iletilmesi, son commiti değiştirecektir. 
+            Yeni bir commit oluşturmak yerine, aşamalı değişiklikler önceki commite eklenecektir. 
+            Bu komut, sistemin yapılandırılmış metin düzenleyicisini açacak ve 
+            önceden belirtilen kesinleştirme mesajını değiştirmenizi isteyecektir.
+        </p>
+
+        <h1>Git Diff</h1>
+        <p>
+            Diffing, iki input data setini alan ve aralarındaki değişiklikleri veren bir fonksiyondur.  
+            git diff, yürütüldüğünde Git veri kaynaklarında bir diff işlevi çalıştıran çok kullanımlı 
+            bir Git komutudur. Bu veri kaynakları, commitler, dallar, dosyalar ve daha fazlası olabilir. 
+            Bu belge, git diff ve farklı iş akışı modellerinin ortak çağrılarını tartışacaktır. 
+            Git diff komutu, bir Git deposunun mevcut durumunu analiz etmek için genellikle git status ve git log ile birlikte kullanılır.
+        </p>
+        <h2>Diff Okunması: Outputlar</h2>
+        <p>
+            Aşağıdaki örnekler basit bir repoda yürütülecektir. Repo aşağıdaki komutlarla oluşturulur:
+        </p>
+        <div class="console">
+            $:> mkdir diff_test_repo
+            $:> cd diff_test_repo
+            $:> touch diff_test.txt
+            $:> echo "this is a git diff test example" > diff_test.txt
+            $:> git init .
+            Initialized empty Git repository in /Users/kev/code/test/.git/
+            $:> git add diff_test.txt
+            $:> git commit -am"add diff test file"
+            [main (root-commit) 6f77fc3] add diff test file
+            1 file changed, 1 insertion(+)
+            create mode 100644 diff_test.txt
+        </div>
+        <p>
+            Bu noktada git diff'i çalıştırırsak çıktı olmaz. 
+            Repoda diff'e herhangi bir değişiklik olmadığı için bu 
+            beklenen bir davranıştır. Repo oluşturulduktan ve diff_test.txt 
+            dosyasını ekledikten sonra, diff çıktısıyla denemeye başlamak için 
+            dosyanın içeriğini değiştirebiliriz.
+        </p>
+        <div class="console">
+            $:> echo "this is a diff example" > diff_test.txt
+        </div>
+        <p>
+            Bu komutu çalıştırmak diff_test.txt dosyasının içeriğini değiştirir. 
+            Değiştirildikten sonra, bir farkı görebilir ve çıktıyı analiz edebiliriz. 
+            Şimdi git diff'i çalıştırmak aşağıdaki çıktıyı üretecektir:
+        </p>
+        <div class="console">
+            diff --git a/diff_test.txt b/diff_test.txt
+            index 6b0c6cf..b37e70a 100644
+            --- a/diff_test.txt
+            +++ b/diff_test.txt
+            @@ -1 +1 @@
+            -this is a git diff test example
+            +this is a diff example
+        </div>
+        <P>
+            Şimdi fark çıktısının daha ayrıntılı bir dökümünü inceleyelim:
+        </P>
+        <h3>1- Karşılaştırma İnputu</h3>
+        <div class="console">
+            diff --git a/diff_test.txt b/diff_test.txt
+        </div>
+        <p>
+            Bu satır, farkın giriş kaynaklarını görüntüler. 
+            a/diff_test.txt ve b/diff_test.txt dosyalarının diff'e geçtiğini görebiliriz.
+        </p>
+        <h3>2- Meta data</h3>
+        <div class="console">
+            index 6b0c6cf..b37e70a 100644
+        </div>
+        <p>
+            Bu satır, bazı dahili Git meta verilerini görüntüler. 
+            Büyük olasılıkla bu bilgilere ihtiyacınız olmayacak. 
+            Bu çıktıdaki sayılar, Git nesne sürümü karma tanımlayıcılarına karşılık gelir.
+        </p>
+        <h3>3- Değişiklikler için işaretçiler</h3>
+        <div class="console">
+            --- a/diff_test.txt
+            +++ b/diff_test.txt
+        </div>
+        <p>
+            Bu satırlar, her bir diff giriş kaynağına semboller atayan bir göstergedir. 
+            Bu durumda, a/diff_test.txt dosyasındaki değişiklikler --- ile işaretlenir 
+            ve b/diff_test.txt dosyasındaki değişiklikler +++ simgesiyle işaretlenir.
+        </p>
+        <h3>4- Diff Parçaları</h3>
+        <p>
+            Kalan diff çıktısı, diff 'parçaların' bir listesidir. 
+            Bir diff, yalnızca dosyanın değişen bölümlerini görüntüler. 
+            Mevcut örneğimizde, basit bir senaryo üzerinde çalıştığımız için sadece bir parçamız var. 
+            Parçaların kendi ayrıntılı çıktı semantiği vardır.
+        </p>
+        <div class="console">
+            @@ -1 +1 @@
+            -this is a git diff test example
+            +this is a diff example
+        </div>
+        <p>
+            İlk satır yığın başlığıdır. Her öbeğin başına @@ sembolleri içine alınmış bir başlık eklenir. 
+            Başlığın içeriği, dosyada yapılan değişikliklerin bir özetidir. Basitleştirilmiş örneğimizde, 
+            -1 +1 yani birinci satırda değişiklikler oldu. Daha gerçekçi bir farkta, şöyle bir başlık görürsünüz:
+        </p>
+        <div class="console">
+            @@ -34,6 +34,8 @@
+        </div>
+        <p>
+            Bu başlık örneğinde 34. satırdan başlayarak 6 satır çıkarılmıştır. 
+            Ayrıca 34. satırdan başlayarak 8 satır eklenmiştir.
+            Fark öbeğinin kalan içeriği son değişiklikleri görüntüler. 
+            Değiştirilen her satırın başına, değişikliklerin hangi diff girişi versiyonundan 
+            geldiğini gösteren bir + veya - sembolü eklenir. Daha önce tartıştığımız gibi -, 
+            a/diff_test.txt dosyasındaki değişiklikleri ve + işareti, b/diff_test.txt dosyasındaki 
+            değişiklikleri gösterir.
+        </p>
+        <h2>Değişiklikleri İşaretleme</h2>
+        <h3>git diff --color-words</h3>
+        <p>
+            git diff'in ayrıca değişiklikleri çok daha iyi ayrıntı düzeyiyle vurgulamak için 
+            özel bir modu vardır: -‐color-words. Bu mod, eklenen ve kaldırılan satırları boşluklara 
+            göre tokenize eder ve ardından bunları farklılaştırır.
+        </p>
+        <div class="console">
+            $:> git diff --color-words
+            diff --git a/diff_test.txt b/diff_test.txt
+            index 6b0c6cf..b37e70a 100644
+            --- a/diff_test.txt
+            +++ b/diff_test.txt
+            @@ -1 +1 @@
+            this is agit difftest example
+        </div>
+        <h3>git diff-highlight</h3>
+        <p>
+            Git kaynağını klonlarsanız, contrib adında bir alt dizin bulacaksınız. 
+            Git ile ilgili bir dizi araç ve henüz git çekirdeğine terfi ettirilmemiş
+             diğer ilginç parçalar ve parçalar içerir. Bunlardan biri, diff-highlight 
+             adlı bir Perl betiğidir. Diff-highlight, diff çıktısının eşleşen satırlarını 
+             eşleştirir ve değişen alt sözcük parçalarını vurgular.
+        </p>
+        <div class="console">
+            $:> git diff | /your/local/path/to/git-core/contrib/diff-highlight/diff-highlight
+            diff --git a/diff_test.txt b/diff_test.txt
+            index 6b0c6cf..b37e70a 100644
+            --- a/diff_test.txt
+            +++ b/diff_test.txt
+            @@ -1 +1 @@
+            -this is a git diff test example
+            +this is a diff example
+        </div>
+        <h2>Diffing binary Dosyaları</h2>
+        <p>
+            Şimdiye kadar gösterdiğimiz metin dosyası yardımcı programlarına 
+            ek olarak, git diff ikili dosyalar üzerinde çalıştırılabilir. 
+            Ne yazık ki, varsayılan çıktı pek yardımcı olmuyor.
+        </p>
+        <dix class="console">
+            $:> git diff
+            Binary files a/script.pdf and b/script.pdf differ
+        </dix>
+        <p>
+            Git, farkı gerçekleştirmeden önce ikili dosyalarınızın içeriğini 
+            metne dönüştürmek için bir kabuk komutu belirtmenize izin veren 
+            bir özelliğe sahiptir. Yine de biraz kurulum gerektiriyor. Öncelikle, 
+            belirli bir ikili dosya türünü metne nasıl dönüştüreceğinizi 
+            açıklayan bir textconv filtresi belirlemeniz gerekir. PDF'lerimi 
+            insanlar tarafından okunabilir HTML'ye dönüştürmek için pdftohtml 
+            (homebrew aracılığıyla kullanılabilir) adlı basit bir yardımcı program 
+            kullanıyoruz. Bunu, .git/config dosyanızı düzenleyerek tek bir havuz 
+            için veya ~ /.gitconfig dosyasını düzenleyerek genel olarak ayarlayabilirsiniz.
+        </p>
+        <dix class="console">
+            [diff "pdfconv"]
+            textconv=pdftohtml -stdout
+        </dix>
+        <p>
+            O zaman tek yapmanız gereken bir veya daha fazla dosya 
+            modelini pdfconv filtremizle ilişkilendirmek. Bunu, repository'nizinin 
+            kökünde bir .gitattributes dosyası oluşturarak yapabilirsiniz.
+        </p>
+        <dix class="console">
+            *.pdf diff=pdfconv
+        </dix>
+        <p>
+            Yapılandırıldıktan sonra, git diff önce ikili dosyayı yapılandırılmış dönüştürücü 
+            betiği aracılığıyla çalıştıracak ve dönüştürücü çıktısını diff'leyecektir. 
+            Aynı teknik, her türlü ikili dosyadan faydalı farklar elde etmek için uygulanabilir, 
+            örneğin: zip'ler, kavanozlar ve diğer arşivler: pdf2html yerine unzip -l (veya benzeri) 
+            kullanmak, size bu dosyalar arasında eklenmiş veya kaldırılmış yolları gösterecektir. 
+            görüntüleri kaydeder: exiv2, görüntü boyutları gibi meta veri değişikliklerini 
+            göstermek için kullanılabilir belgeler: .odf, .doc ve diğer belge biçimlerini 
+            düz metne dönüştürmek için dönüştürme araçları mevcuttur. Bir tutamda, dizeler 
+            genellikle resmi bir dönüştürücünün bulunmadığı ikili dosyalar için çalışır.
+        </p>
+        <h2>Dosyaları karşılaştırmak: git diff file</h2>
+        <p>
+            git diff komutuna açık bir dosya yolu seçeneği iletilebilir. 
+            git diff'e bir dosya yolu iletildiğinde, diff işlemi belirtilen dosya 
+            kapsamına alınır. Aşağıdaki örnekler bu kullanımı göstermektedir.
+        </p>
+        <div class="console">
+            git diff HEAD ./path/to/file
+        </div>
+        <p>
+            Bu örnek, çağrıldığında ./path/to/file kapsamına alınmıştır, çalışma 
+            dizinindeki belirli değişiklikleri dizine karşı karşılaştırır ve henüz 
+            hazırlanmamış değişiklikleri gösterir. Varsayılan olarak git diff, 
+            HEAD ile karşılaştırmayı yürütür. Yukarıdaki örnekte HEAD öğesinin 
+            atlanması git diff ./path/to/file aynı etkiye sahiptir.
+        </p>
+        <div class="console">
+            git diff --cached ./path/to/file
+        </div>
+        <p>
+            --cached seçeneğiyle git diff çağrıldığında, 
+            diff aşamalı değişiklikleri yerel depoyla karşılaştırır. 
+            --cached seçeneği --staged ile eşanlamlıdır.
+        </p>
+        <h2>Tüm değişiklikleri karşılaştırma</h2>
+        <p>
+            Bir dosya yolu olmadan git diff'i çağırmak, deponun tamamındaki değişiklikleri karşılaştırır. 
+            Yukarıdaki, dosyaya özgü örnekler, ./path/to/file bağımsız değişkeni olmadan çağrılabilir ve 
+            yerel depodaki tüm dosyalarda aynı çıktı sonuçlarına sahip olabilir.
+        </p>
+        <h2>Son committen sonraki değişiklikler</h2>
+        <p>
+            Varsayılan olarak git diff, son işlemeden bu yana kaydedilmemiş değişiklikleri size gösterecektir. 
+        </p>
+        <div class="console">
+            git diff
+        </div>
+        <h2>İki commit arasındaki değişikleri karşılaştırma</h2>
+        <p>
+            git diff, Git refs'lerini diff'e iletebilir. Bazı örnek referanslar, 
+            HEAD, etiketler ve dal adlarıdır. Git'teki her taahhüdün, GIT LOG'u 
+            çalıştırdığınızda alabileceğiniz bir taahhüt kimliği vardır. Bu taahhüt 
+            kimliğini git diff'e de iletebilirsiniz.
+        </p>
+        <div class="console">
+            git log --pretty=oneline
+            957fbc92b123030c389bf8b4b874522bdf2db72c add feature
+            ce489262a1ee34340440e55a0b99ea6918e19e7a rename some classes
+            6b539f280d8b0ec4874671bae9c6bed80b788006 refactor some code for feature
+            646e7863348a427e1ed9163a9a96fa759112f102 add some copy to body
+
+            $:> git diff 957fbc92b123030c389bf8b4b874522bdf2db72c ce489262a1ee34340440e55a0b99ea6918e19e7a
+        </div>
+        <h2>Branchların Karşılaştırılması</h2>
+        <p>
+            Branchlar, diğer tüm ref girdileri gibi git diff ile karşılaştırılır.
+        </p>
+        <div class="console">
+            git diff branch1..other-feature-branch
+        </div>
+        <p>
+            Bu örnek, nokta operatörünü tanıtır. Bu örnekteki iki nokta, 
+            fark girişinin her iki dalın uçları olduğunu gösterir. Noktalar atlanırsa 
+            ve dallar arasında bir boşluk kullanılırsa aynı etki olur. Ek olarak, 
+            üç nokta operatörü vardır:
+        </p>
+        <div class="console">
+            git diff branch1...other-feature-branch
+        </div>
+        <p>
+            Üç nokta operatörü, ilk giriş parametresi branch 1'i değiştirerek farkı başlatır. 
+            Branch 1'i, iki fark girişi arasındaki paylaşılan ortak ata commitin bir ref'ine,
+            Branch 1'in ve diğer-özellik-dalının ortak atasına değiştirir. Son parametre giriş parametresi, 
+            diğer özellik dalının ucu olarak değişmeden kalır.
+        </p>
+        <h2>İki branchdaki dosyaların karşılaştırılması</h2>
+        <p>
+            Dallar arasında belirli bir dosyayı karşılaştırmak için, dosyanın yolunu üçüncü bağımsız değişken olarak git diff'e iletin.
+        </p>
+        <div class="console">
+            git diff main new_branch ./diff_test.txt
+        </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+    
+
+</html>
