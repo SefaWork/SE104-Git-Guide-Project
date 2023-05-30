@@ -1,0 +1,521 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>Değişiklikleri Kaydetme</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="/guides/" class="next-page">Sonraki Ders >></a>
+        </div>
+        <h1>Repository İnceleme</h1>
+        <h1>Git Status</h1>
+        <p>
+            git status komutu, çalışma dizininin ve hazırlama alanının durumunu görüntüler. 
+            Hangi değişikliklerin aşamalandırıldığını, hangilerinin yapılmadığını ve hangi 
+            dosyaların Git tarafından izlenmediğini görmenizi sağlar. Durum çıktısı, commit 
+            edilen proje geçmişiyle ilgili herhangi bir bilgi göstermez. Bunun için git log kullanmanız gerekiyor.
+        </p>
+        <h3>İlgili bazı git komutları</h3>
+        <p>
+            Git Tag : Etiketler, Git geçmişindeki belirli noktalara işaret eden referanslardır. 
+            git etiketi genellikle geçmişte işaretlenmiş bir sürüm sürümü için 
+            kullanılan bir noktayı yakalamak için kullanılır.
+        
+        </p>
+        <p>
+            Git Blame : Git Blame üst düzey işlevi, bir dosyadaki belirli işlenmiş satırlara 
+            eklenmiş yazar meta verilerinin görüntülenmesidir. 
+            Bu, belirli bir kodun geçmişini keşfetmek ve kodun bir repoya ne, nasıl 
+            ve neden eklendiği hakkındaki soruları yanıtlamak için kullanılır.
+
+        </p>
+        <p>
+            Git Log : git log komutu, kaydedilmiş anlık görüntüleri görüntüler. 
+            Proje geçmişini listelemenizi, filtrelemenizi ve belirli değişiklikleri aramanızı sağlar.
+        </p>
+        <h1>Git Log</h1>
+        <p>
+            git log komutu, kaydedilmiş anlık görüntüleri görüntüler. Proje geçmişini listelemenizi,
+            filtrelemenizi ve belirli değişiklikleri aramanızı sağlar. Git durumu, çalışma dizinini 
+            ve hazırlama alanını incelemenize izin verirken, git log yalnızca commit edilen geçmiş 
+            üzerinde çalışır.
+            Günlük çıktısı, commitleri basitçe filtrelemekten tamamen kullanıcı tanımlı bir biçimde 
+            görüntülemeye kadar çeşitli şekillerde özelleştirilebilir. Git günlüğünün 
+            en yaygın yapılandırmalarından bazıları aşağıda sunulmuştur.
+        </p>
+        <div class="console">
+            git log
+        </div>
+        <p>
+            Varsayılan biçimlendirmeyi kullanarak tüm commit geçmişini görüntüleyin. 
+            Çıktı birden fazla ekranı kaplıyorsa, kaydırmak için Boşluk 
+            tuşunu ve çıkmak için q tuşunu kullanabilirsiniz.
+        </p>
+        <div class="console">
+            git log -n <limit></limit>
+        </div>
+        <p>
+            Commit sayısını sınırlayın. Örneğin, git log -n 3 yalnızca 3 işlem gösterecektir.
+            Her commiti tek bir satıra yoğunlaştırın. Bu, proje geçmişine ilişkin üst düzey 
+            bir genel bakış elde etmek için kullanışlıdır.
+        </p>
+        <div class="console">
+            git log --oneline
+        </div>
+        <div class="console">
+            git log --stat
+        </div>
+        <p>
+            Sıradan git günlüğü bilgilerinin yanı sıra, hangi dosyaların değiştirildiğini ve 
+            her birine eklenen veya silinen ilgili satır sayısını ekleyin.
+        </p>
+        <div class="console">
+            git log -p
+        </div>
+        <p>
+            Her bir commiti temsil eden yamayı görüntüleyin. Bu, proje geçmişiniz hakkında 
+            sahip olabileceğiniz en ayrıntılı görünüm olan her bir commitin tam farkını gösterir.
+        </p>
+        <div class="console">
+            git log --author="<pattern>"
+        </div>
+        <p>
+            Belirli bir yazarın commitlerini arayın. Bağımsız değişken, düz bir dize veya normal bir ifade olabilir.
+        </p>
+        <div class="console">
+            git log --grep="<pattern>"
+        </div>
+        <p>
+            Düz bir dize veya normal bir ifade olabilen, ile eşleşen bir kesinleştirme mesajına sahip commitlerini arayın.
+        </p>
+        <div class="console">
+            git log <since>..<until></until>
+        </div>
+        <p>
+            Yalnızca < beri > ve < bitiş > arasında gerçekleşen commitleri göster. Her iki argüman da bir commitleri kimliği, 
+            bir şube adı, HEAD veya başka herhangi bir revizyon referansı olabilir.
+        </p>
+        <div class="console">
+            git log <file></file>
+        </div>
+        <p>
+            Yalnızca belirtilen dosyayı içeren commitleri görüntüleyin. Bu, belirli bir dosyanın geçmişini görmenin kolay bir yoludur.
+        </p>
+
+        <div class="console">
+            git log --graph --decorate --oneline
+        </div>
+        <p>
+            Dikkate alınması gereken birkaç yararlı seçenek. --graph flag mesajlarının sol tarafında commit 
+            metin tabanlı bir grafiğini çizer. --decorate, gösterilen commitlerin branch adlarını veya 
+            etiketlerini ekler. --oneline, commit bilgilerini tek bir satırda göstererek, bir bakışta commitlere
+            göz atmayı kolaylaştırır.
+        </p>
+        <h1>Git Tag</h1>
+        <h3>Bir etiket (tag) olusturmak</h3>
+        <div class="console">
+            git tag < tagname >
+        </div>
+        <p>
+            < tagname > öğesini, etiketin oluşturulduğu andaki repo durumuna semantik bir tanımlayıcı ile değiştirin. 
+            Yaygın bir model, git etiketi v1.4 gibi sürüm numaralarını kullanmaktır. 
+            Git, açıklamalı ve hafif etiketler olmak üzere iki farklı etiket türünü destekler. 
+            Önceki örnek, hafif bir etiket oluşturdu. Hafif etiketler ve Açıklamalı etiketler, 
+            repoladıkları eşlik eden meta veri miktarında farklılık gösterir. En iyi uygulama, 
+            Açıklamalı etiketleri genel ve Hafif etiketleri özel olarak kabul etmektir. 
+            Açıklamalı etiketler, etiketleyici adı, e-posta ve tarih gibi ekstra meta verileri repolar. 
+            Bu, genel yayın için önemli bir veridir. Hafif etiketler aslında bir commitin 'yer imleridir', 
+            bunlar yalnızca bir commitin adı ve işaretçisidir, ilgili commitin hızlı bağlantılar oluşturmak için kullanışlıdır.
+
+        </p>
+        <h3>Açıklamalı Etiketler (Annotated Tags)</h3>
+        <p>
+            Açıklamalı etiketler, Git veritabanında tam nesneler olarak repolanır. 
+            Yinelemek gerekirse, etiketleyici adı, e-posta ve tarih gibi ekstra meta verileri repolarlar. 
+            Commitlere ve commit mesajlarına benzer Açıklamalı etiketlerin bir etiketleme mesajı vardır. 
+            Ek olarak, güvenlik için açıklamalı etiketler GNU Privacy Guard (GPG) ile imzalanabilir ve 
+            doğrulanabilir. Git etiketleme için önerilen en iyi uygulamalar, 
+            ilişkili tüm meta verilere sahip olabilmeniz için açıklamalı etiketleri hafife tercih etmektir.
+
+        </p>
+        <div class="console">
+            git tag -a v1.4
+        </div>
+        <p>
+            Bu komutu çalıştırmak, v1.4 ile tanımlanan yeni bir açıklamalı etiket oluşturacaktır. 
+            Komut daha sonra, daha fazla meta veri girişi istemek için yapılandırılmış 
+            varsayılan metin düzenleyiciyi açacaktır.
+        </p>
+        <div class="console">
+            git tag -a v1.4 -m "my version 1.4"
+        </div>
+        <p>
+            Bu komutun çalıştırılması önceki çalıştırmaya benzer, ancak komutun bu sürümüne 
+            -m seçeneği ve bir mesaj iletilir. Bu, hemen yeni bir etiket oluşturacak ve 
+            -m seçeneğiyle iletilen iletiyi kaydetmek için yerel metin düzenleyiciyi 
+            açmaktan vazgeçecek olan git commit -m'ye benzer bir kolaylık yöntemidir.
+        </p>
+        <h3>Hafif Etiketler (Lightweight Tags)</h3>
+        <div class="console">
+            git tag v1.4-lw
+        </div>
+        <p>
+            Bu komutu yürütmek, v1.4-lw olarak tanımlanan basit bir etiket oluşturur. 
+            Hafif etiketler -a, -s veya -m seçenekleri olmadan oluşturulur. 
+            Hafif etiketler, yeni bir etiket sağlama toplamı oluşturur ve bunu 
+            projenin reposunun .git/ dizininde saklar.
+        </p>
+        <h2>Etiketleri Listeleme</h2>
+        <p>
+            Repodaki ekitekleri sıralamak için bunu kullanın:
+        </p>
+        <div class="console">
+            git tag
+        </div>
+        <p>
+            output bu şekilde olucaktır
+        </p>
+        <div class="console">
+            v0.10.0
+            v0.10.0-rc1
+            v0.11.0
+            v0.11.0-rc1
+            v0.11.1
+            v0.11.2
+            v0.12.0
+            v0.12.0-rc1
+            v0.12.1
+            v0.12.2
+            v0.13.0
+            v0.13.0-rc1
+            v0.13.0-rc2
+        </div>
+        <p>
+            Etiketlerin listesini iyileştirmek için -l seçeneği bir joker karakter ifadesiyle iletilebilir:
+        </p>
+        <div class="console">
+            $ git tag -l *-rc*
+            v0.10.0-rc1
+            v0.11.0-rc1
+            v0.12.0-rc1
+            v0.13.0-rc1
+            v0.13.0-rc2
+            v0.14.0-rc1
+            v0.9.0-rc1
+            v15.0.0-rc.1
+            v15.0.0-rc.2
+            v15.4.0-rc.3
+        </div>
+        <p>
+            Bu önceki örnek, -l seçeneğini ve -rc önekiyle işaretlenmiş tüm etiketlerin bir listesini döndüren, 
+            geleneksel olarak sürüm adaylarını tanımlamak için kullanılan -rc'nin bir joker ifadesini kullanır.
+        </p>
+        <h3>Eski commitleri etiketlemek</h3>
+        <p>
+            Önceki etiketleme örnekleri, örtük commitler üzerindeki işlemleri göstermiştir. Varsayılan 
+            olarak git etiketi, HEAD'in başvurduğu committe bir etiket oluşturur. Alternatif olarak git etiketi, 
+            belirli bir commite ref olarak iletilebilir. Bu, HEAD varsayılanı yerine geçirilen 
+            commiti etiketleyecektir. Daha eski commitlerin bir listesini toplamak için git log komutunu yürütün.
+        </p>
+        <div class="console">
+            $ git log --pretty=oneline
+            15027957951b64cf874c3557a0f3547bd83b3ff6 Merge branch 'feature'
+            a6b4c97498bd301d84096da251c98a07c7723e65 add update method for thing
+            0d52aaab4479697da7686c15f77a3d64d9165190 one more thing
+            6d52a271eda8725415634dd79daabbc4d9b6008e Merge branch 'experiment'
+        </div>
+        <p>
+            Git log'u çalıştırmak, bir commit listesi çıkarır. Bu örnekte, yeni etiket için en çok commit edilen Birleştirme branchı 
+            'özelliğini' seçeceğiz. Git'e geçmek için commit SHA karmasına başvurmamız gerekecek:
+        </p>
+        <div class="console">
+            git tag -a v1.2 15027957951b64cf874c3557a0f3547bd83b3ff6
+        </div>
+        <p>
+            Yukarıdaki git etiketi çağrısını yürütmek, önceki git log örneğinde seçtiğimiz commit
+            için v1.2 olarak tanımlanan yeni bir açıklamalı kesinleştirme oluşturacaktır.
+        </p>
+        <h3>Tekrar Etiketleme (ReTagging)</h3>
+        <p>
+            Mevcut bir etiketle aynı tanımlayıcıya sahip bir etiket oluşturmaya çalışırsanız Git aşağıdaki gibi bir hata verir:
+        </p>
+        <div class="console">
+            fatal: tag 'v0.4' already exists
+        </div>
+        <p>
+            Ek olarak, daha eski bir commiti mevcut bir etiket tanımlayıcısıyla etiketlemeye çalışırsanız Git aynı hatayı atar.
+
+            Mevcut bir etiketi güncellemeniz gerektiğinde -f FORCE seçeneği kullanılmalıdır.
+        </p>
+        <div class="console">
+            git tag -a -f v1.4 15027957951b64cf874c3557a0f3547bd83b3ff6
+        </div>
+        <p>
+            Yukarıdaki komutu çalıştırmak, 15027957951b64cf874c3557a0f3547bd83b3ff6 taahhüdünü 
+            v1.4 etiket tanımlayıcısına eşler. v1.4 etiketi için mevcut tüm içeriği geçersiz kılar.
+        </p>
+        <h3>Paylaşma:Etiketleri Remote'a itme</h3>
+        <p>
+            Etiketleri paylaşmak branchları itmeye benzer. Varsayılan olarak git Push, etiketleri göndermez. 
+            Etiketler açıkça git Push'a iletilmelidir.
+        </p>
+        <div class="console">
+            $ git push origin v1.4
+            Counting objects: 14, done.
+            Delta compression using up to 8 threads.
+            Compressing objects: 100% (12/12), done.
+            Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done.
+            Total 14 (delta 3), reused 0 (delta 0)
+            o git@bitbucket.com:atlasbro/gittagdocs.git
+            * [new tag]         v1.4 -> v1.4
+        </div>
+        <p>
+            Birden fazla etiketi aynı anda itmek için --tags seçeneğini git push komutuna iletin. 
+            Başka bir kullanıcı bir repoyu klonladığında veya çektiğinde, yeni etiketleri alacaktır.
+        </p>
+        <h3>Etiketleri Check Etme</h3>
+        <p>
+            Bir Reponun durumunu git checkout komutunu kullanarak bir etikette görüntüleyebilirsiniz.
+        </p>
+        <div class="console">
+            git checkout v1.4
+        </div>
+        <p>
+            Yukarıdaki komut v1.4 etiketini kontrol edecektir. Bu, repoyu ayrılmış bir HEAD durumuna getirir. 
+            Bu, yapılan değişikliklerin etiketi güncellemeyeceği anlamına gelir. 
+            Yeni bir müstakil commit oluşturacaklar. Bu yeni müstakil commit, herhangi bir şubenin 
+            parçası olmayacak ve yalnızca commitlerin SHA karması tarafından doğrudan erişilebilir 
+            olacaktır. Bu nedenle, ayrılmış bir HEAD durumunda değişiklik yaparken her zaman yeni 
+            bir dal oluşturmak en iyi uygulamadır.
+        </p>
+        <h3>Etiket Silme</h3>
+        <p>
+            Etiketleri silmek basit bir işlemdir. -d seçeneğinin ve bir etiket tanımlayıcının 
+            git etiketine iletilmesi, tanımlanan etiketi siler.
+        </p>
+        <div class="console">
+            $ git tag
+            v1
+            v2
+            v3
+            $ git tag -d v1
+            $ git tag
+            v2
+            v3
+        </div>
+        <p>
+            Bu örnekte, v1, v2, v3'ü gösteren etiketlerin bir listesini görüntülemek 
+            için git etiketi yürütülür, Ardından v1 etiketini silen git tag -d v1 yürütülür.
+        </p>
+        <h1>Git Blame</h1>
+        <p>
+            git blame komutu, kapsamlı kullanım seçeneklerine sahip çok yönlü bir 
+            sorun giderme yardımcı programıdır. Git blame üst düzey işlevi, bir dosyadaki 
+            belirli işlenmiş satırlara eklenmiş yazar meta verilerinin görüntülenmesidir. 
+            Bu, bir dosyanın geçmişinin belirli noktalarını incelemek ve satırı değiştiren 
+            son yazarın kim olduğu konusunda bağlam elde etmek için kullanılır. Bu, belirli 
+            bir kodun geçmişini keşfetmek ve kodun bir depoya ne, nasıl ve neden eklendiği 
+            hakkındaki soruları yanıtlamak için kullanılır.
+        </p>
+        <p>
+            Git blame genellikle bir GUI ekranıyla birlikte kullanılır. 
+            Bitbucket gibi çevrimiçi Git barındırma siteleri, blame için 
+            kullanıcı arabirimi sarmalayıcıları olan blame görünümleri sunar. 
+            Bu görüşlere, çekme istekleri ve commitler etrafındaki işbirlikçi 
+            tartışmalarda atıfta bulunulur. Ek olarak, Git entegrasyonuna sahip 
+            çoğu IDE'nin dinamik blame görünümleri de vardır.
+        </p>
+        <h2>Nasıl Çalışır?</h2>
+        <p>
+            git Blame göstermek için biraz geçmişe sahip bir havuza ihtiyacımız var. 
+            Açık kaynaklı git-blame-example projesini kullanacağız. Bu açık kaynak projesi, 
+            farklı yazarlardan birkaç commit içeren bir README.md dosyası içeren basit 
+            bir havuzdur. Git Blame kullanım örneğimizin ilk adımı, örnek depoyu git klonlamaktır.
+        </p>
+        <div class="clone">
+            git clone https://kevzettler@bitbucket.org/kevzettler/git-blame-example.git && cd git-blame-example
+        </div>
+        <p>
+            Artık örnek kodun bir kopyasına sahip olduğumuza göre onu git blame ile keşfetmeye başlayabiliriz. 
+            Örnek deponun durumu git log kullanılarak incelenebilir. Commit geçmişi aşağıdaki gibi görünmelidir:
+        </p>
+        <div class="console">
+            $ git log
+    commit 548dabed82e4e5f3734c219d5a742b1c259926b2
+    Author: Juni Mukherjee <jmukherjee@atlassian.com>
+    Date:   Thu Mar 1 19:55:15 2018 +0000
+
+    Git blame için kim, ne ve ne zaman olduğunu takip etmesine yardımcı olacak başka bir commit
+
+    commit eb06faedb1fdd159d62e4438fc8dbe9c9fe0728b
+    Author: Juni Mukherjee <jmukherjee@atlassian.com>
+    Date:   Thu Mar 1 19:53:23 2018 +0000
+
+    Üçüncü commitin Kev ve Albert ile birlikte oluşturulması, böylece Kev'in blame belgelerini alabilmesi.
+
+    commit 990c2b6a84464fee153253dbf02e845a4db372bb
+    Merge: 82496ea 89feb84
+    Author: Albert So <aso@atlassian.com>
+    Date:   Thu Mar 1 05:33:01 2018 +0000
+
+        Merged in albert-so/git-blame-example/albert-so/readmemd-edited-online-with-bitbucket-1519865641474 (pull request #2)
+
+        README.md edited online with Bitbucket
+
+    commit 89feb84d885fe33d1182f2112885c2a64a4206ec
+    Author: Albert So <aso@atlassian.com>
+    Date:   Thu Mar 1 00:54:03 2018 +0000
+
+        README.md edited online with Bitbucket
+        </div>
+        <p>
+            git blameyalnızca tek tek dosyalarda çalışır. 
+            Yararlı çıktılar için bir dosya yolu gereklidir. 
+            Git blame varsayılan olarak çalıştırılması, basitçe 
+            komutların yardım menüsünün çıktısını verecektir. Bu örnek 
+            için README.MD dosyası üzerinde işlem yapacağız. Proje için 
+            belge kaynağı olarak bir git deposunun kök dizinine bir 
+            BENİOKU dosyası eklemek yaygın bir açık kaynak yazılım uygulamasıdır.
+        </p>
+        <div class="console">
+            git blame README.MD
+        </div>
+        <div class="console">
+            $ git blame README.md
+    82496ea3 (kevzettler     2018-02-28 13:37:02 -0800  1) 
+    82496ea3 (kevzettler     2018-02-28 13:37:02 -0800  2)
+    89feb84d (Albert So      2018-03-01 00:54:03 +0000  3) 
+    82496ea3 (kevzettler     2018-02-28 13:37:02 -0800  4)
+    82496ea3 (kevzettler     2018-02-28 13:37:02 -0800  5) 
+    82496ea3 (kevzettler     2018-02-28 13:37:02 -0800  6)
+    89feb84d (Albert So      2018-03-01 00:54:03 +0000  7) 
+    89feb84d (Albert So      2018-03-01 00:54:03 +0000  8)
+    eb06faed (Juni Mukherjee 2018-03-01 19:53:23 +0000  9) 
+    eb06faed (Juni Mukherjee 2018-03-01 19:53:23 +0000 10)
+    548dabed (Juni Mukherjee 2018-03-01 19:55:15 +0000 11) 
+    548dabed (Juni Mukherjee 2018-03-01 19:55:15 +0000 13) 
+        </div>
+        <p>
+            Bu, README.md dosyasının ilk 13 satırının bir örneğidir. 
+            
+        </p>
+        
+        
+        
+        
+        <h3>Bazı kullanım örnekleri</h3>
+
+
+
+        <div class="console">
+            git blame -L 1,5 README.md
+        </div>
+        <p>
+            -L seçeneği, çıktıyı istenen satır aralığıyla sınırlayacaktır. Burada çıktıyı 1'den 5'e kadar olan satırlarla sınırladık.
+        </p>
+        <div class="console">
+            git blame -e README.md
+        </div>
+        <p>
+            -e seçeneği, kullanıcı adı yerine yazarın e-posta adresini gösterir.
+        </p>
+        <div class="console">
+            git blame -w README.md
+        </div>
+        <p>
+            -w seçeneği, boşluk değişikliklerini yok sayar. Önceki bir yazar, sekmelerden boşluklara geçerek veya yeni satırlar 
+            ekleyerek bir dosyanın aralığını değiştirmişse, bu, ne yazık ki, bu değişiklikleri göstererek git suçu çıktısını gizler.
+        </p>
+        <div class="console">
+            git blame -M README.md
+        </div>
+        <p>
+            -M seçeneği, aynı dosya içinde taşınan veya kopyalanan satırları algılar. Bu, satırları taşıyan veya 
+            kopyalayan son yazar yerine satırların orijinal yazarını bildirir.
+        </p>
+        <div class="console">
+            git blame -C README.md
+        </div>
+        <p>
+            -C seçeneği, başka dosyalardan taşınan veya kopyalanan satırları algılar. 
+            Bu, satırları taşıyan veya kopyalayan son yazar yerine satırların orijinal yazarını bildirir.
+        </p>
+        <h3>Git Blame vs. Git Log</h3>
+        <p>
+            git blame, bir satırı değiştiren son yazarı görüntülerken, çoğu zaman bir satırın 
+            orijinal olarak ne zaman eklendiğini bilmek isteyeceksiniz. Bu git blame 
+            kullanarak başarmak zahmetli olabilir. -w, -C ve -M seçeneklerinin bir kombinasyonunu 
+            gerektirir. git log komutunu kullanmak çok daha uygun olabilir.
+        </p>
+        <p>
+            Belirli bir kod parçasının eklendiği veya değiştirildiği tüm orijinal commitleri 
+            listelemek için git log'u -S seçeneğiyle çalıştırın. -S seçeneğini 
+            aradığınız kodla birlikte ekleyin. Örnek olarak kullanmak için yukarıdaki 
+            README çıktısındaki satırlardan birini alalım. README çıktısının 12. Satırından 
+            "CSS3D and WebGL renderers" metnini alalım.
+        </p>
+        <div class="console">
+            $ git log -S"CSS3D and WebGL renderers." --pretty=format:'%h %an %ad %s'
+            e339d3c85 Mario Schuettel Tue Oct 13 16:51:06 2015 +0200 reverted README.md to original content
+            509c2cc35 Daniel Tue Sep 8 13:56:14 2015 +0200 Updated README
+            cb20237cc Mr.doob Mon Dec 31 00:22:36 2012 +0100 Removed DOMRenderer. Now with the CSS3DRenderer it has become irrelevant.
+        </div>
+        <p>
+            Bu çıktı bize README'deki içeriğin 3 farklı yazar tarafından 3 kez eklendiğini veya 
+            değiştirildiğini gösterir. Orijinal olarak Mr.doob tarafından cb20237cc commitine 
+            eklenmiştir. Bu örnekte, git log'un başına --pretty-format seçeneği eklenmiştir. Bu 
+            seçenek, git log'un varsayılan çıktı biçimini git log biçimiyle eşleşen bir biçime 
+            dönüştürür.
+        </p>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+
+
+
+
+
+
+
+</html>
