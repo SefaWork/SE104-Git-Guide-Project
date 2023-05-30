@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Değişiklikleri Geri Alma</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="../styles/header.css">
+        <link rel="stylesheet" href="../styles/console.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="/guides/" class="next-page">Geri Dön >></a>
+        </div>
+
+        <p>
+            <h1>
+                Commit ve Değişiklikleri Geri Alma
+            </h1>
+
+            Bu derste git log, git checkout, git clean, git revert, git reset ve git rm komutlarını öğreneceğiz.
+            Git'te yazı editörleri gibi geleneksel "geri al" fonksiyonları olmadığını bilmek önemlidir.<br><br>
+
+            Git'i bir zaman dizisi yöneticisi gibi düşünebilirsiniz. 
+            Commitler bu zaman dizisinde belirli noktaları belirtmektedir.
+            Ayrıca, dallar kullanarak bu zaman dizisini farklı dallara ayırabiliriz.
+            Git'te "geri aldığınızda" teknik olarak geçmişe dönüyorsunuzdur ya da aynı hatanın yapılmadığı başka bir zaman dizisine geçiyorsunuzdur.<br><br>
+
+            Bu derste, bir yazılım projesinin önceki sürümleriyle çalışmak için gerekli olan tüm becerileri öğrenebileceksiniz.
+            İlk olarak, eski commitleri keşfetmeyi nasıl yapacağınızı öğrenecek, ardından proje geçmişindeki genel commitleri geri alma ile yerel makinenizde yayınlanmamış değişiklikleri sıfırlama arasındaki farkı öğreneceksiniz.
+
+            <h2>Kaybedileni bulmak: Eski Commitleri İncelemek</h2>
+
+            Versiyon kontrol sistemlerinin prensibi herhangi bir hata yapıldığında önceki bir güvenli versiyona geri gelmektir.
+            Böylelikle bütün kod tabanının kaybedilmesi önlenmiş olur.
+            Bir commit geçmişi oluşturduktan sonra eski commitleri inceleyebilir ve onlara geri dönebilirsiniz.
+            Bu eski commitleri incelemek için en önemli komut "git log" komutudur.
+            Aşağıdaki örnekte popüler bir grafik kodunun en son commitlerini listeliyoruz.
+
+            <div class="console">
+                git log --oneline<br>
+                e2f9a78fe Replaced FlyControls with OrbitControls<br>
+                d35ce0178 Editor: Shortcuts panel Safari support.<br>
+                9dbe8d0cf Editor: Sidebar.Controls to Sidebar.Settings.Shortcuts. Clean up.<br>
+                05c5288fc Merge pull request #12612 from TyLindberg/editor-controls-panel<br>
+                0d8b6e74b Merge pull request #12805 from harto/patch-1<br>
+                23b20c22e Merge pull request #12801 from gam0022/improve-raymarching-example-v2<br>
+                fe78029f1 Fix typo in documentation<br>
+                7ce43c448 Merge pull request #12794 from WestLangley/dev-x<br>
+                17452bb93 Merge pull request #12778 from OndrejSpanel/unitTestFixes<br>
+                b5c1b5c70 Merge pull request #12799 from dhritzkiv/patch-21<br>
+                1b48ff4d2 Updated builds.<br>
+                88adbcdf6 WebVRManager: Clean up.<br>
+                2720fbb08 Merge pull request #12803 from dmarcos/parentPoseObject<br>
+                9ed629301 Check parent of poseObject instead of camera<br>
+                219f3eb13 Update GLTFLoader.js<br>
+                15f13bb3c Update GLTFLoader.js<br>
+                6d9c22a3b Update uniforms only when onWindowResize<br>
+                881b25b58 Update ProjectionMatrix on change aspect
+            </div>
+
+            Her commitin kendine özel bir SHA-1 hash kodu bulunmaktadır. Bu kodlar commit zaman dizisinde seyahat etmek ve eski commitlere geri dönmek için kullanılır.
+            Varsayılan kullanım olarak "git log" komutu sadece geçerli daldaki commitleri gösterir.
+            Tüm dallarda yapılan commitleri listelemek için aşağıdaki komutu kullanabilirsiniz:
+
+            <div class="console">
+                git log --branches=*
+            </div>
+
+            Geri dönmek istediğiniz bir commiting referansını bulduktan sonra "git checkout" komutunu kullanarak yerel cihazınızda o zaman dilimine geri dönüş yapabilirsiniz.
+            Geliştirme sürecinin normal seyri sırasında, 
+            HEAD genellikle ana veya başka bir yerel dalı işaret eder,
+            ancak önceki bir commite kontrol ettiğinizde, 
+            HEAD artık bir dala işaret etmez ve doğrudan bir commite işaret eder. 
+            Buna "ayrılmış HEAD" durumu denir ve aşağıdaki gibi görselleştirilebilir:
+
+            <img src="/images/head.svg" style="margin: 0px auto; display: block; width: 65%;">
+
+            Eski bir dosyayı kontrol etmek HEAD işaretçisinin değerini değiştirmez. 
+            Aynı dal ve commit üzerinde kalır ve "ayrılmış HEAD" durumuna girmez.
+            Dosyanın eski versiyonunu diğer her dosya gibi commitleyebilirsiniz.
+
+            <h2>Eski Version Görüntülemek</h2>
+            
+            Önce dönmek istediğiniz versiyonun kodunu bulmanız lazım. Bunu "git log" komutunu kullanarak bulabilirsiniz:
+
+            <div class="console">
+                git log --oneline
+            </div>
+
+            Sürüm geçmişi aşağıdakine benzer şekilde görünecektir:
+
+            <div class="console">
+                b7119f2 Çılgın şeyler denemeye devam<br>
+                872fa7e Çılgın bir şey dene<br>
+                a1e8fb5 hello.txt dosyasına önemli değişiklikler<br>
+                435b61d hello.txt oluştur<br>
+                9773e52 ilk commit
+            </div>
+
+            Git checkout komutunu kullanarak "hello.txt dosyasına önemli değişiklikler" commitine geri dönüş yapabiliriz:
+
+            <div class="console">
+                git checkout a1e8fb5
+            </div>
+
+            Bunu kullanarak mevcut klasörün durumunu a1e8fb5 commitindeki durum ile aynı yapıyorsunuz.
+            Dosyalara bakabilir, compile edebilir, test yürütebilir ve hatta dosyaları değiştirebilirsiniz.
+            Yaptığınız değişiklikler projenin mevcut durumuna kaydedilmeyecektir.
+            Projeyi geliştirmeye devam etmek için projenin mevcut durumuna geri dönmeniz gerekmektedir:
+
+            <div class="console">
+                git checkout main
+            </div>
+
+            Burada varsayılan "main" dalda geliştirme yaptığınızı varsayıyoruz.
+            Ana dala geri döndükten sonra git revert veya git reset komutları ile istenmeyen değişiklikleri geri alabilirsiniz.
+
+            <h2>Yapılan Commiti Geri Almak</h2>
+
+            Bu kısımda aşağıdaki durumda olan bir proje için birden fazla geri alma metotu inceleyeceğiz:
+
+            <div class="console">
+                git log --oneline<br>
+                872fa7e Çılgın bir şey dene<br>
+                a1e8fb5 hello.txt dosyasına önemli değişiklikler<br>
+                435b61d hello.txt oluştur<br>
+                9773e52 ilk commit
+            </div>
+
+            Burada 872fa7e commitini geri almaya odaklanacağız.
+
+            <h3>Git Checkout İle Geri Alma</h3>
+
+            Git checkout komutunu kullanarak önceki commiti, a1e8fb5'i kontrol edebiliriz ve depoyu çılgın committen öncesindeki bir duruma getirebiliriz. 
+            Belirli bir commiti çıkarma, depoyu "ayrılmış HEAD" durumuna getirir.
+            Bu, artık herhangi bir dal üzerinde çalışmadığınız anlamına gelir.
+            Bu durumda, değişiklikleri yapılan bir dalı daha önceden belirlenmiş bir dala geri döndürdüğünüzde, yaptığınız yeni commitler tabansız kalır. 
+            Tabansız commitler, Git'in çöp toplayıcısı tarafından silinebilir. 
+            Çöp toplayıcısı, yapılandırılmış bir aralıkta çalışır ve tabansız commitleri kalıcı olarak yok eder.
+            Tabansız commitlerin çöp toplayıcı tarafından silinmesini önlemek için bir dalda olduğumuzdan emin olmanız gerekmektedir.
+
+            <br><br>
+
+            Ayrılmış HEAD durumundan "git checkout -b deli_olmayan_yeni_dal" komutunu kullanarak "deli_olmayan_yeni_dal" adında yeni bir dal oluşturabilir ve o duruma geçebiliriz.
+            Depo şimdi 872fa7e commitinin artık olmadığı yeni bir zaman dizisinde bulunuyor.
+            Bu noktada, 872fa7e commitinin olmadığı bu yeni dalda çalışmaya devam edebilir ve onu 'geri alınmış' olarak kabul edebiliriz.
+            Ne yazık ki, önceki dala ihtiyacınız varsa, belki de ana dalınızdı, bu geri alma stratejisi uygun değildir.
+            Başka 'geri alma' stratejilerine göz atalım.
+
+            <h3>Git Revert İle Geri Alma</h3>
+
+            Bu sefer geri alma 'revert' işlemi deneyelim. 
+            Eğer "git revert HEAD" komutunu çalıştırırsak, Git son commitin tersini içeren yeni bir commit oluşturacaktır.
+            Bu, mevcut dal geçmişine yeni bir commit ekler ve şimdi aşağıdaki gibi görünür:
+
+            <div class="console">
+                git log --oneline<br>
+                e2f9a78 Revert "Çılgın bir şey dene"<br>
+                872fa7e Çılgın bir şey dene<br>
+                a1e8fb5 hello.txt dosyasına önemli değişiklikler<br>
+                435b61d hello.txt oluştur<br>
+                9773e52 ilk commit
+            </div>
+
+            872fa7e commitinin hala geçmişte olmasına rağmen yeni e2f9a78 commiti onun tam tersi olduğu için değişiklikler geri alınmış sayabiliriz.
+            Önceki metota fark olarak aynı dalı kullanmaya devam edebiliriz.
+            Bu çözüm tatmin edici bir geri alma yöntemidir.
+            Bu, paylaşılan genel depolarla çalışmak için ideal bir 'geri alma' yöntemidir.
+            Eğer yönetilen ve minimum bir Git geçmişi tutma gereksinimleriniz varsa, bu strateji tatmin edici olmayabilir.
+
+            <h3>Git Reset İle Geri Alma</h3>
+
+            Bu örnek için "Git Revert İle Geri Alma" kısmından devam edeceğiz. 
+            "git reset --hard a1e8fb5" komutunu kullanırsak versiyon geçmişi o commite geri dönecektir.
+            Artık, "git log" komutunu kullanmak bize bu görünümü verecektir:
+
+            <div class="console">
+                git log --oneline<br>
+                a1e8fb5 hello.txt dosyasına önemli değişiklikler<br>
+                435b61d hello.txt oluştur<br>
+                9773e52 ilk commit
+            </div>
+
+            Gördüğünüz gibi e2f9a78 ve 872fa7e commitleri tamamen zaman dizisinden silinmiş bulunmaktadır.
+            Buradan sonra artık çalışmaya devam edebilir ve çılgın değişiklikler hiç olmamış gibi devam edebiliriz.
+            Bu metot geçmiş açısından en temiz olanıdır.
+            Bunu kullanmak yerel değişiklikler için harikadır, ancak uzaktan depolar için zorluklar ortaya çıkacaktır.
+            Eğer 872fa7e commiti var olan bir paylaşılan uzaktan bir deponuz var ise Git bunu yakalayacaktır ve hemen bir hata verecektir.
+            Git bu durumlarda sizin yerel kopyanızın eski olduğunu zannedecektir ve push işlemini durduracaktır.
+            Bu durumlarda "git revert" kullanılması daha elverişlidir.
+
+            <h2>En Son Commiti Geri Alma</h2>
+
+            Önceki bölümde, commitleri geri alma için farklı stratejileri tartıştık. 
+            Bu stratejilerin hepsi en son commiti değiştirmek için uygulanabilir. 
+            Ancak bazı durumlarda, son commiti kaldırmanız veya sıfırlamanız gerekmez. 
+            Belki de yanlışlıkla yapılmış bir committi. Bu durumda en son commiti düzeltebilirsiniz. 
+            Çalışma dizininde daha fazla değişiklik yaptıysanız ve bunları git add kullanarak commit için hazır hale getirdiyseniz, "git commit --amend" komutunu kullanabilirsiniz. 
+            Bu, Git'in yapılandırılmış sistem düzenleyicisini açmasını sağlar ve en son commit mesajını değiştirmenize olanak tanır. 
+            Yeni değişiklikler düzeltilmiş commite eklenir.
+
+            <h2>Commit Edilmemiş Değişiklikleri Geri Alma</h2>
+            <h3>Çalışan Klasör</h3>
+
+            Çalışma klasörü genellikle yerel dosya sistemiyle senkron halindedir.
+            Çalışma klasöründeki değişiklikleri geri almak için, favori düzenleyicinizi kullanarak dosyaları düzenleyebilirsiniz.
+            Git'in çalışma klasörünü yönetmeye yardımcı olan birkaç yardımcı programı vardır.
+            "git clean" komutu, çalışma klasöründeki yapılan değişiklikleri geri almak için bir kolaylık sağlayan bir yardımcı programdır.
+            Ayrıca, "git reset" --mixed veya --hard seçenekleriyle kullanılabilir ve çalışma klasöründe bir sıfırlama uygular.
+
+            <h3>Staging Dizini</h3>
+
+            git add komutu, değişiklikleri staging dizinine eklemek için kullanılır.
+            Git reset genellikle staging dizini değişikliklerini geri almak için kullanılır.
+            --mixed reset, staging dizinindeki bekleyen değişiklikleri geri alır.
+        </p>
+    </body>
+</html>
