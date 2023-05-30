@@ -600,16 +600,16 @@
         </p>
         <h3>İzlenmeyen veya gizlenen dosyaları Stash etmek</h3>
         <p>
-            By default, running git stash will stash:
+            Varsayılan olarak, git stash'ı çalıştırmak şunları saklayacaktır:
 
-            changes that have been added to your index (staged changes)
-            changes made to files that are currently tracked by Git (unstaged changes)
-            But it will not stash:
+             dizininize eklenen değişiklikler (aşamalı değişiklikler)
+             şu anda Git tarafından izlenen dosyalarda yapılan değişiklikler (aşamalı olmayan değişiklikler)
+             Ama saklanmayacak:
 
-            new files in your working copy that have not yet been staged
-            files that have been ignored
-            So if we add a third file to our example above, but don't stage it 
-            (i.e. we don't run git add), git stash won't stash it.
+             çalışma kopyanızda henüz hazırlanmamış yeni dosyalar
+             göz ardı edilen dosyalar
+             Öyleyse, yukarıdaki örneğimize üçüncü bir dosya eklersek, ancak onu hazırlamazsak
+             (yani git add'i çalıştırmıyoruz), git stash onu saklamaz.
         </p>
         <div class="console">
             $ script.js
@@ -695,9 +695,9 @@
             stash@{2}: WIP on main: 5002d47 our new homepage
         </div>
         <p>
-            By default, git stash pop will re-apply the most recently created stash: stash@{0}
+            Varsayılan olarak git stash pop, en son oluşturulan stash'ı yeniden uygular: stash@{0}
 
-            You can choose which stash to re-apply by passing its identifier as the last argument, for example:
+             Tanımlayıcısını son bağımsız değişken olarak ileterek hangi stash'ın yeniden uygulanacağını seçebilirsiniz, örneğin:
         </p>
         <div class="console">
             $ git stash pop stash@{2}
