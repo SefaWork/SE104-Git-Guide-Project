@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quiz</title>
+
+        <!--Fonts imported from Google Fonts.-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">        
+
+        <link rel="stylesheet" href="/styles/header.css">
+        <link rel="stylesheet" href="/styles/console.css">
+
+        <style>
+
+            ol .questionTitle {
+                font-size: 150%;
+                margin-bottom: 50px;
+            }
+
+            ol .questionTitle span {
+                display: block;
+            }
+
+            .questionTitle input {
+                margin-top: 15px;
+                transform: scale(2);
+                accent-color: #FF0000;
+            }
+
+            .questionTitle .correntAnswer {
+                accent-color: #00FF00;
+            }
+
+            .questionTitle label {
+                font-size: 75%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-container">
+                <a href="/">Ana Sayfa</a>
+                <a href="/guides/">Dersler</a>
+                <a href="/sources.html">Kaynakça</a>
+            </div>
+        </div>
+
+        <ol>
+            <li class="questionTitle">
+                <span>Hangi komut yerel commitleri geri almak için en iyi metottur?</span>
+
+                <input type="radio" id="question1-A" name="question1" value="A" autocomplete="off">
+                <label for="question1-A" name="question1">A) git checkout</label><br>
+
+                <input type="radio" id="question1-B" name="question1" value="B" autocomplete="off" class="correntAnswer">
+                <label for="question1-B" name="question1" class="correctAnswerLabel">B) git reset</label><br>
+
+                <input type="radio" id="question1-C" name="question1" value="C" autocomplete="off">
+                <label for="question1-C" name="question1">C) git revert</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Aşağıdaki komutlardan hangisi bir deponun zaman çizelgesini görmemizi sağlar?</span>
+
+                <input type="radio" id="question2-A" name="question2" value="A" autocomplete="off">
+                <label for="question2-A" name="question2">A) git commit</label><br>
+
+                <input type="radio" id="question2-B" name="question2" value="B" autocomplete="off">
+                <label for="question2-B" name="question2">B) git init</label><br>
+
+                <input type="radio" id="question2-C" name="question2" value="C" autocomplete="off" class="correntAnswer">
+                <label for="question2-C" name="question2" class="correctAnswerLabel">C) git log</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Aşağıdaki komutlardan hangisi uzaktaki bir depoyu yerel cihaza indirmemizi sağlar?</span>
+
+                <input type="radio" id="question3-A" name="question3" value="A" autocomplete="off">
+                <label for="question3-A" name="question3">A) git fork URL</label><br>
+
+                <input type="radio" id="question3-B" name="question3" value="B" autocomplete="off" class="correntAnswer">
+                <label for="question3-B" name="question3" class="correctAnswerLabel">B) git clone URL</label><br>
+
+                <input type="radio" id="question3-C" name="question3" value="C" autocomplete="off">
+                <label for="question3-C" name="question3">C) git download URL</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Versiyon kontrolü aşağıdakilerden hangisini <span style="text-decoration: underline; display: inline-block;">sağlamaz?</span></span>
+
+                <input type="radio" id="question4-A" name="question4" value="A" autocomplete="off">
+                <label for="question4-A" name="question4">A) Herhangi bir hata durumunda projeyi eski güvenli bir sürüme geri almak.</label><br>
+
+                <input type="radio" id="question4-B" name="question4" value="B" autocomplete="off" class="correntAnswer">
+                <label for="question4-B" name="question4" class="correctAnswerLabel">B) Otomatik kod yazımı sağlamak.</label><br>
+
+                <input type="radio" id="question4-C" name="question4" value="C" autocomplete="off">
+                <label for="question4-C" name="question4">C) Kod tabanına yapılan değişiklikleri analiz ve kontrol etmek.</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Aşağıdaki komutlardan hangisi yeni bir yerel depo oluşturmayı sağlar?</span>
+
+                <input type="radio" id="question5-A" name="question5" value="A" autocomplete="off">
+                <label for="question5-A" name="question5">A) git init</label><br>
+
+                <input type="radio" id="question5-B" name="question5" value="B" autocomplete="off">
+                <label for="question5-B" name="question5">B) git clone</label><br>
+
+                <input type="radio" id="question5-C" name="question5" value="C" autocomplete="off" class="correntAnswer">
+                <label for="question5-C" name="question5" class="correctAnswerLabel">C) Hepsi.</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Yeni bir dal oluşturmak için aşağıdakilerden hangisi kullanılamaz?</span>
+
+                <input type="radio" id="question6-A" name="question6" value="A" autocomplete="off" class="correntAnswer">
+                <label for="question6-A" name="question6" class="correctAnswerLabel">A) git reset</label><br>
+
+                <input type="radio" id="question6-B" name="question6" value="B" autocomplete="off">
+                <label for="question6-B" name="question6">B) git branch</label><br>
+
+                <input type="radio" id="question6-C" name="question6" value="C" autocomplete="off">
+                <label for="question6-C" name="question6">C) git checkout</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Bir proje içindeki bazı dosyaların git tarafından yok sayılmasını sağlayan özel dosyanın adı ve uzantısı nedir?</span>
+
+                <input type="radio" id="question7-A" name="question7" value="A" autocomplete="off" class="correntAnswer">
+                <label for="question7-A" name="question7" class="correctAnswerLabel">A) .gitignore</label><br>
+
+                <input type="radio" id="question7-B" name="question7" value="B" autocomplete="off">
+                <label for="question7-B" name="question7">B) git.ignore</label><br>
+
+                <input type="radio" id="question7-C" name="question7" value="C" autocomplete="off">
+                <label for="question7-C" name="question7">C) gitignore.txt</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>Aşağıdaki komutlardan hangisi bir projenin o andaki değişikliklerin anlık görüntüsünü yakalar?</span>
+
+                <input type="radio" id="question8-A" name="question8" value="A" autocomplete="off">
+                <label for="question8-A" name="question8">A) git add</label><br>
+
+                <input type="radio" id="question8-B" name="question8" value="B" autocomplete="off">
+                <label for="question8-B" name="question8">B) git save</label><br>
+
+                <input type="radio" id="question8-C" name="question8" value="C" autocomplete="off" class="correntAnswer">
+                <label for="question8-C" name="question8" class="correctAnswerLabel">C) git commit</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>"git add" ve "git commit" komutlarının Git'teki amacını doğru bir şekilde açıklayan ifade hangisidir?</span>
+
+                <input type="radio" id="question9-A" name="question9" value="A" autocomplete="off" class="correntAnswer">
+                <label for="question9-A" name="question9" class="correctAnswerLabel">A) git add, commit için değişiklikleri aşama aşama hazırlamak için kullanılır, git commit ise aşamaya alınan değişiklikleri kalıcı olarak kaydetmek için kullanılır.</label><br>
+
+                <input type="radio" id="question9-B" name="question9" value="B" autocomplete="off">
+                <label for="question9-B" name="question9">B) git add, yeni bir commit oluşturmak için kullanılır, git commit ise bir sonraki commit için değişiklikleri aşama aşama hazırlamak için kullanılır.</label><br>
+
+                <input type="radio" id="question9-C" name="question9" value="C" autocomplete="off">
+                <label for="question9-C" name="question9">C) git add ve git commit, Git'te değişiklikleri kaydetme amacıyla kullanılan aynı amaçlı iki farklı komuttur.</label><br>
+            </li>
+
+            <li class="questionTitle">
+                <span>"git commit -am" komutundaki "-am" seçeneği Git'te ne işe yarar?</span>
+
+                <input type="radio" id="question10-A" name="question10" value="A" autocomplete="off">
+                <label for="question10-A" name="question10">A) Bu seçenek, tüm değiştirilmiş dosyaları tek bir komutta eklemenize ve commit etmenize olanak sağlar.</label><br>
+
+                <input type="radio" id="question10-B" name="question10" value="B" autocomplete="off">
+                <label for="question10-B" name="question10">B) Bu seçenek, yeni bir dal oluşturur ve tüm değişiklikleri tek adımda commit eder.</label><br>
+
+                <input type="radio" id="question10-C" name="question10" value="C" autocomplete="off" class="correntAnswer">
+                <label for="question10-C" name="question10" class="correctAnswerLabel">C) Bu seçenek, önceki commite yeni değişiklikler ekleyerek önceki commiti düzeltir.</label><br>
+            </li>
+        </ol>
+
+        <script>
+            let elements = document.querySelectorAll("input")
+            
+            for(const element of elements) {
+                element.onclick = function() {
+                    let allInputs = document.getElementsByName(element.name);
+                    for (const input of allInputs) {
+                        if(input.tagName == "LABEL") {
+                            if(input.className == "correctAnswerLabel") {
+                                input.style.color = "#00FF00"
+                            } else {
+                                input.style.color = "#FF0000"
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
