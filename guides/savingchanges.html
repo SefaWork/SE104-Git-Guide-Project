@@ -489,9 +489,9 @@
 
             $:> git diff 957fbc92b123030c389bf8b4b874522bdf2db72c ce489262a1ee34340440e55a0b99ea6918e19e7a
         </div>
-        <h2>Branchların Karşılaştırılması</h2>
+        <h2>Dalların Karşılaştırılması</h2>
         <p>
-            Branchlar, diğer tüm ref girdileri gibi git diff ile karşılaştırılır.
+            Dallar, diğer tüm ref girdileri gibi git diff ile karşılaştırılır.
         </p>
         <div class="console">
             git diff branch1..other-feature-branch
@@ -506,12 +506,12 @@
             git diff branch1...other-feature-branch
         </div>
         <p>
-            Üç nokta operatörü, ilk giriş parametresi branch 1'i değiştirerek farkı başlatır. 
-            Branch 1'i, iki fark girişi arasındaki paylaşılan ortak ata commitin bir ref'ine,
-            Branch 1'in ve diğer-özellik-dalının ortak atasına değiştirir. Son parametre giriş parametresi, 
+            Üç nokta operatörü, ilk giriş parametresi dal 1'i değiştirerek farkı başlatır. 
+            Dal 1'i, iki fark girişi arasındaki paylaşılan ortak ata commitin bir ref'ine,
+            Dal 1'in ve diğer-özellik-dalının ortak atasına değiştirir. Son parametre giriş parametresi, 
             diğer özellik dalının ucu olarak değişmeden kalır.
         </p>
-        <h2>İki branchdaki dosyaların karşılaştırılması</h2>
+        <h2>İki daldaki dosyaların karşılaştırılması</h2>
         <p>
             Dallar arasında belirli bir dosyayı karşılaştırmak için, dosyanın yolunu üçüncü bağımsız değişken olarak git diff'e iletin.
         </p>
@@ -594,7 +594,7 @@
                 modified:   index.html
         </div>
         <p>
-            Aynı saklanmış değişiklikleri birden fazla branch'a uygulamak istiyorsanız bu kullanışlıdır.
+            Aynı saklanmış değişiklikleri birden fazla dal'a uygulamak istiyorsanız bu kullanışlıdır.
             Artık saklamanın temellerini bildiğinize göre, git stash ile ilgili bilmeniz gereken bir uyarı var: 
             varsayılan olarak Git, izlenmeyen veya göz ardı edilen dosyalarda yapılan değişiklikleri saklamaz.
         </p>
